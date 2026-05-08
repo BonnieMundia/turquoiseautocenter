@@ -29,7 +29,9 @@
 
   <!-- Logo -->
   <a href="#home" class="nav-logo" aria-label="Turquoise Auto Centre home">
-    <div class="logo-icon" aria-hidden="true">🔧</div>
+    <div class="logo-icon" aria-hidden="true">
+      <img src="img/zturquoise-auto-logo.png" alt="Turquoise Auto Centre logo" />
+    </div>
     <div class="logo-text">
       <strong>TURQUOISE AUTO</strong>
       <span>Centre Ltd</span>
@@ -136,7 +138,7 @@
 <!-- ══════════════════════════════════════════
      SERVICES
 ══════════════════════════════════════════ -->
-<div style="background: var(--body-bg);">
+<div class="section-bg-wrapper">
 <section id="services" aria-label="Services">
 
   <div class="section-tag reveal reveal-up">What We Do</div>
@@ -326,8 +328,8 @@
           <li>Isuzu</li>
         </ul>
       </div>
-      <div class="service-card reveal reveal-up reveal-delay-1" style="background: linear-gradient(135deg, rgba(0,188,212,0.08), var(--card-bg));">
-        <div class="service-icon" style="background: rgba(0,188,212,0.2);">📦</div>
+      <div class="service-card highlight-card reveal reveal-up reveal-delay-1">
+        <div class="service-icon highlight-icon">📦</div>
         <h3>Parts Ordering</h3>
         <p>Can't find what you need? We source parts on request for any make or model.</p>
         <ul class="service-items">
@@ -627,15 +629,15 @@
         <div class="about-block-label">Commitment to Customer Satisfaction &amp; Transparency</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-1">
-        <div class="about-block-num" style="color: var(--turquoise);">Same</div>
+        <div class="about-block-num accent-turquoise">Same</div>
         <div class="about-block-label">Day Service Available</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-2">
-        <div class="about-block-num" style="color: var(--turquoise);">📱</div>
+        <div class="about-block-num accent-turquoise">📱</div>
         <div class="about-block-label">WhatsApp Status Updates</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-3">
-        <div class="about-block-num" style="color: var(--red-light);">🏅</div>
+        <div class="about-block-num accent-red">🏅</div>
         <div class="about-block-label">Certified Technicians</div>
       </div>
     </div>
@@ -690,7 +692,7 @@
           <div class="contact-item-value">
             Juja, Opposite St. Peter's School
             <br>
-            <span style="font-size:13px; color:var(--text-secondary);">
+            <span class="contact-item-note">
               1.5 km from Thika Superhighway — Take Exit 15 from Nairobi
             </span>
           </div>
@@ -704,7 +706,7 @@
           <div class="contact-item-value">
             Mon – Sat: 7:30 AM – 6:00 PM
             <br>
-            <span style="font-size:13px; color:var(--text-secondary);">
+            <span class="contact-item-note">
               Sunday: By appointment
             </span>
           </div>
@@ -719,6 +721,11 @@
       <div class="form-group">
         <label for="name">Full Name</label>
         <input id="name" type="text" placeholder="Your name" autocomplete="name" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email (optional)</label>
+        <input id="email" type="email" placeholder="your@email.com" autocomplete="email" />
       </div>
 
       <div class="form-group">
@@ -755,15 +762,11 @@
         <textarea id="details" placeholder="Describe the issue or service needed..."></textarea>
       </div>
 
-      <button
-        class="btn-primary"
-        style="width:100%; justify-content:center;"
-        onclick="alert('Thank you! We will contact you via WhatsApp shortly.')"
-      >
-        📱 Send WhatsApp Enquiry
+      <button id="enquiry-submit" class="btn-primary btn-full-width">
+        📧 Send Enquiry
       </button>
     </div>
-    
+
   </div>
 </div>
 </div><!-- /contact full-width -->
