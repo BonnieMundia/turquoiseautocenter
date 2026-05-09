@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Check if blog grid exists
   if (document.querySelector('.blog-grid')) {
     window.blogSystem = new BlogSystem({
-      apiUrl: 'http://localhost:3001/api', // Update to your API URL
+      apiUrl: 'https://usencbuaumsgmitvlznt.supabase.co/functions/v1/get-posts-v2',
       postsPerPage: 10
     });
   }
