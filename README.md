@@ -23,7 +23,7 @@ A responsive blog section with Node.js backend and Supabase integration.
 - Node.js (v14 or higher)
 - Supabase account and project
 
-### Installation
+### Installation.
 
 1. Install dependencies:
 ```bash
