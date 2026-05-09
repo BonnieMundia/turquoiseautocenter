@@ -5,7 +5,7 @@
 class BlogSystem {
   constructor(config = {}) {
     // API configuration
-    this.apiUrl = config.apiUrl || 'http://localhost:3001/api';
+    this.apiUrl = config.apiUrl || 'https://usencbuaumsgmitvlznt.supabase.co/functions/v1/get-posts-v2';
     this.supabaseUrl = config.supabaseUrl;
     this.supabaseKey = config.supabaseKey;
     
