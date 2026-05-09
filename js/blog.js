@@ -9,7 +9,7 @@ class BlogSystem {
     this.supabaseUrl = config.supabaseUrl;
     this.supabaseKey = config.supabaseKey;
     
-    // Blog state
+    // Blog states
     this.currentPage = 1;
     this.currentCategory = null;
     this.postsPerPage = config.postsPerPage || 10;
