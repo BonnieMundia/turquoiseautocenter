@@ -29,9 +29,7 @@
 
   <!-- Logo -->
   <a href="#home" class="nav-logo" aria-label="Turquoise Auto Centre home">
-    <div class="logo-icon" aria-hidden="true">
-      <img src="turquoise-auto-logo.png" alt="Turquoise Auto Centre logo" />
-    </div>
+    <div class="logo-icon" aria-hidden="true">🔧</div>
     <div class="logo-text">
       <strong>TURQUOISE AUTO</strong>
       <span>Centre Ltd</span>
@@ -45,7 +43,6 @@
     <li><a href="#pricing"> Pricing</a></li>
     <li><a href="#faq">     FAQ</a></li>
     <li><a href="#about">   About</a></li>
-    <li><a href="#blog">    Blog</a></li>
     <li><a href="#contact"  class="nav-cta">Contact Us</a></li>
   </ul>
 
@@ -79,7 +76,6 @@
   <a href="#pricing"> 💰 Pricing</a>
   <a href="#faq">     ❓ FAQ</a>
   <a href="#about">   🏢 About</a>
-  <a href="#blog">    📝 Blog</a>
   <a href="#contact"  class="mobile-cta">📞 Contact Us</a>
 </nav>
 
@@ -140,7 +136,7 @@
 <!-- ══════════════════════════════════════════
      SERVICES
 ══════════════════════════════════════════ -->
-<div class="section-bg-wrapper">
+<div style="background: var(--body-bg);">
 <section id="services" aria-label="Services">
 
   <div class="section-tag reveal reveal-up">What We Do</div>
@@ -330,8 +326,8 @@
           <li>Isuzu</li>
         </ul>
       </div>
-      <div class="service-card highlight-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon highlight-icon">📦</div>
+      <div class="service-card reveal reveal-up reveal-delay-1" style="background: linear-gradient(135deg, rgba(0,188,212,0.08), var(--card-bg));">
+        <div class="service-icon" style="background: rgba(0,188,212,0.2);">📦</div>
         <h3>Parts Ordering</h3>
         <p>Can't find what you need? We source parts on request for any make or model.</p>
         <ul class="service-items">
@@ -631,90 +627,19 @@
         <div class="about-block-label">Commitment to Customer Satisfaction &amp; Transparency</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-1">
-        <div class="about-block-num accent-turquoise">Same</div>
+        <div class="about-block-num" style="color: var(--turquoise);">Same</div>
         <div class="about-block-label">Day Service Available</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-2">
-        <div class="about-block-num accent-turquoise">📱</div>
+        <div class="about-block-num" style="color: var(--turquoise);">📱</div>
         <div class="about-block-label">WhatsApp Status Updates</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-3">
-        <div class="about-block-num accent-red">🏅</div>
+        <div class="about-block-num" style="color: var(--red-light);">🏅</div>
         <div class="about-block-label">Certified Technicians</div>
       </div>
     </div>
 
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════
-     BLOG
-══════════════════════════════════════════ -->
-<section id="blog" aria-label="Blog">
-
-  <div class="section-tag reveal reveal-up">Latest Updates</div>
-  <h2 class="reveal reveal-up reveal-delay-1 heading-wipe">AUTO CARE BLOG</h2>
-  <p class="section-desc reveal reveal-up reveal-delay-2">
-    Stay informed with the latest automotive tips, maintenance advice, and
-    industry insights from our certified technicians.
-  </p>
-
-  <!-- Category Filters -->
-  <div class="blog-filters reveal reveal-up reveal-delay-3" role="group" aria-label="Blog category filters">
-    <!-- Populated by blog.js -->
-  </div>
-
-  <!-- Blog Search -->
-  <div class="blog-search reveal reveal-up reveal-delay-3">
-    <input 
-      type="text" 
-      class="blog-search-input" 
-      placeholder="🔍 Search posts..." 
-      aria-label="Search blog posts"
-    />
-  </div>
-
-  <!-- Blog Posts Grid -->
-  <div class="blog-grid">
-    <!-- Blog cards populated by blog.js -->
-    <div class="blog-card reveal reveal-up">
-      <div class="blog-image">
-        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=250&fit=crop" alt="Car maintenance tips" />
-      </div>
-      <div class="blog-content">
-        <h3>Essential Car Maintenance Checklist for Every Driver</h3>
-        <p>Regular maintenance is key to keeping your vehicle running smoothly and safely. Learn about the critical checks every driver should perform regularly to extend vehicle life and prevent costly repairs.</p>
-        <a href="#" class="blog-read-more">Read More →</a>
-      </div>
-    </div>
-
-    <div class="blog-card reveal reveal-up reveal-delay-1">
-      <div class="blog-image">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" alt="Tyre safety" />
-      </div>
-      <div class="blog-content">
-        <h3>Why Proper Tyre Maintenance Saves Lives</h3>
-        <p>Tyres are your vehicle's only contact with the road. Discover why regular alignment, balancing, and tread checks are crucial for safety, fuel efficiency, and handling performance.</p>
-        <a href="#" class="blog-read-more">Read More →</a>
-      </div>
-    </div>
-
-    <div class="blog-card reveal reveal-up reveal-delay-2">
-      <div class="blog-image">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=250&fit=crop" alt="Engine diagnostics" />
-      </div>
-      <div class="blog-content">
-        <h3>Understanding Modern Engine Diagnostics</h3>
-        <p>Modern vehicles are equipped with sophisticated onboard computers. Learn how diagnostic scans help identify issues early and prevent major mechanical failures.</p>
-        <a href="#" class="blog-read-more">Read More →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pagination -->
-  <div class="blog-pagination reveal reveal-up reveal-delay-4">
-    <!-- Populated by blog.js -->
   </div>
 </section>
 
@@ -765,7 +690,7 @@
           <div class="contact-item-value">
             Juja, Opposite St. Peter's School
             <br>
-            <span class="contact-item-note">
+            <span style="font-size:13px; color:var(--text-secondary);">
               1.5 km from Thika Superhighway — Take Exit 15 from Nairobi
             </span>
           </div>
@@ -779,7 +704,7 @@
           <div class="contact-item-value">
             Mon – Sat: 7:30 AM – 6:00 PM
             <br>
-            <span class="contact-item-note">
+            <span style="font-size:13px; color:var(--text-secondary);">
               Sunday: By appointment
             </span>
           </div>
@@ -794,11 +719,6 @@
       <div class="form-group">
         <label for="name">Full Name</label>
         <input id="name" type="text" placeholder="Your name" autocomplete="name" />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email (optional)</label>
-        <input id="email" type="email" placeholder="your@email.com" autocomplete="email" />
       </div>
 
       <div class="form-group">
@@ -823,8 +743,8 @@
           <option>Welding</option>
           <option>Other</option>
         </select>
-      </div> 
-      
+      </div>
+
       <div class="form-group">
         <label for="vehicle">Vehicle Make &amp; Model</label>
         <input id="vehicle" type="text" placeholder="e.g. Toyota Premio 2018" />
@@ -835,8 +755,12 @@
         <textarea id="details" placeholder="Describe the issue or service needed..."></textarea>
       </div>
 
-      <button id="enquiry-submit" class="btn-primary btn-full-width">
-        📧 Send Enquiry
+      <button
+        class="btn-primary"
+        style="width:100%; justify-content:center;"
+        onclick="alert('Thank you! We will contact you via WhatsApp shortly.')"
+      >
+        📱 Send WhatsApp Enquiry
       </button>
     </div>
 
@@ -860,13 +784,6 @@
 <!-- ══════════════════════════════════════════
      SCRIPTS  (loaded last for performance)
 ══════════════════════════════════════════ -->
-<script src="js/config.js"></script>
-<script src="js/blog-supabase.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    window.blogSystemSupabase = new BlogSystemSupabase(BLOG_CONFIG);
-  });
-</script>
 <script src="js/main.js"></script>
 
 </body>
