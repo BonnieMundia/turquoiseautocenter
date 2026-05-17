@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://turquoiseautocentre.co.ke/sitemap.xml
