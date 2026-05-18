@@ -12,6 +12,9 @@
     rel="stylesheet"
   />
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -58,7 +61,7 @@
       class="theme-toggle"
       aria-label="Switch to light mode"
       title="Toggle light / dark mode"
-    >🌙</button>
+    ><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
 
     <button
       id="hamburger"
@@ -76,13 +79,13 @@
 
 <!-- Mobile Drawer -->
 <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
-  <a href="#home"     class="active">🏠 Home</a>
-  <a href="#services">🔧 Services</a>
-  <a href="#pricing"> 💰 Pricing</a>
-  <a href="#faq">     ❓ FAQ</a>
-  <a href="#about">   🏢 About</a>
-  <a href="#blog">    📝 Blog</a>
-  <a href="#contact"  class="mobile-cta">📞 Contact Us</a>
+  <a href="#home"     class="active"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+  <a href="#services"><i class="fa-solid fa-wrench" aria-hidden="true"></i> Services</a>
+  <a href="#pricing"> <i class="fa-solid fa-tag" aria-hidden="true"></i> Pricing</a>
+  <a href="#faq">     <i class="fa-solid fa-circle-question" aria-hidden="true"></i> FAQ</a>
+  <a href="#about">   <i class="fa-solid fa-building" aria-hidden="true"></i> About</a>
+  <a href="#blog">    <i class="fa-solid fa-newspaper" aria-hidden="true"></i> Blog</a>
+  <a href="#contact"  class="mobile-cta"><i class="fa-solid fa-phone" aria-hidden="true"></i> Contact Us</a>
 </nav>
 
 
@@ -111,8 +114,8 @@
       </p>
 
       <div class="hero-actions reveal reveal-up reveal-delay-3">
-        <a href="#services" class="btn-primary">🔍 Explore Services</a>
-        <a href="#contact"  class="btn-outline">📞 Book Appointment</a>
+        <a href="#services" class="btn-primary"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Explore Services</a>
+        <a href="#contact"  class="btn-outline"><i class="fa-solid fa-phone" aria-hidden="true"></i> Book Appointment</a>
       </div>
     </div>
 
@@ -154,19 +157,19 @@
 
   <!-- Tab buttons -->
   <div class="services-tabs reveal reveal-up reveal-delay-3" role="tablist">
-    <button class="tab-btn active" data-tab="bodywork"   role="tab" aria-selected="true"  aria-controls="tab-bodywork">🚗 Body Work</button>
-    <button class="tab-btn"        data-tab="mechanical" role="tab" aria-selected="false" aria-controls="tab-mechanical">⚙️ Vehicle Services</button>
-    <button class="tab-btn"        data-tab="tyres"      role="tab" aria-selected="false" aria-controls="tab-tyres">🔄 Tyre Centre</button>
-    <button class="tab-btn"        data-tab="carwash"    role="tab" aria-selected="false" aria-controls="tab-carwash">💧 Car Wash</button>
-    <button class="tab-btn"        data-tab="spares"     role="tab" aria-selected="false" aria-controls="tab-spares">🛒 Spares Shop</button>
-    <button class="tab-btn"        data-tab="other"      role="tab" aria-selected="false" aria-controls="tab-other">🔩 Other</button>
+    <button class="tab-btn active" data-tab="bodywork"   role="tab" aria-selected="true"  aria-controls="tab-bodywork"><i class="fa-solid fa-car-side" aria-hidden="true"></i> Body Work</button>
+    <button class="tab-btn"        data-tab="mechanical" role="tab" aria-selected="false" aria-controls="tab-mechanical"><i class="fa-solid fa-gears" aria-hidden="true"></i> Vehicle Services</button>
+    <button class="tab-btn"        data-tab="tyres"      role="tab" aria-selected="false" aria-controls="tab-tyres"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Tyre Centre</button>
+    <button class="tab-btn"        data-tab="carwash"    role="tab" aria-selected="false" aria-controls="tab-carwash"><i class="fa-solid fa-droplet" aria-hidden="true"></i> Car Wash</button>
+    <button class="tab-btn"        data-tab="spares"     role="tab" aria-selected="false" aria-controls="tab-spares"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Spares Shop</button>
+    <button class="tab-btn"        data-tab="other"      role="tab" aria-selected="false" aria-controls="tab-other"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Other</button>
   </div>
 
   <!-- ── Body Work ── -->
   <div id="tab-bodywork" class="tab-panel active" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">🎨</div>
+        <div class="service-icon"><i class="fa-solid fa-spray-can-sparkles" aria-hidden="true"></i></div>
         <h3>Computerized Spray Painting</h3>
         <p>Factory-accurate colour matching using computerised mixing systems for a seamless finish.</p>
         <ul class="service-items">
@@ -177,7 +180,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon">🔨</div>
+        <div class="service-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
         <h3>Panel Beating</h3>
         <p>We restore minor and major accident damage, bringing vehicles back to their original shape and value.</p>
         <ul class="service-items">
@@ -188,7 +191,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-2">
-        <div class="service-icon">🪟</div>
+        <div class="service-icon"><i class="fa-solid fa-window-restore" aria-hidden="true"></i></div>
         <h3>Windscreen Services</h3>
         <p>Expert windscreen repair and full replacement with quality glass for all vehicle models.</p>
         <ul class="service-items">
@@ -199,7 +202,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-3">
-        <div class="service-icon">✨</div>
+        <div class="service-icon"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
         <h3>Buffing &amp; Polishing</h3>
         <p>Machine buffing to remove oxidation, swirl marks, and surface scratches for a showroom shine.</p>
         <ul class="service-items">
@@ -216,7 +219,7 @@
   <div id="tab-mechanical" class="tab-panel" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">🔧</div>
+        <div class="service-icon"><i class="fa-solid fa-wrench" aria-hidden="true"></i></div>
         <h3>Mechanical Repairs</h3>
         <p>Full mechanical diagnostics and repair for all vehicle makes and models.</p>
         <ul class="service-items">
@@ -227,7 +230,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon">⚡</div>
+        <div class="service-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
         <h3>Electrical Repairs</h3>
         <p>Advanced electrical diagnostics and repairs using modern scan tools.</p>
         <ul class="service-items">
@@ -238,7 +241,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-2">
-        <div class="service-icon">🛠️</div>
+        <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
         <h3>Routine Maintenance</h3>
         <p>Scheduled service to keep your vehicle running at peak performance and efficiency.</p>
         <ul class="service-items">
@@ -255,7 +258,7 @@
   <div id="tab-tyres" class="tab-panel" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">🔄</div>
+        <div class="service-icon"><i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i></div>
         <h3>Wheel Alignment</h3>
         <p>Computerised wheel alignment to extend tyre life and improve handling.</p>
         <ul class="service-items">
@@ -265,7 +268,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon">⚖️</div>
+        <div class="service-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
         <h3>Wheel Balancing</h3>
         <p>Dynamic balancing to eliminate vibration and ensure a smooth, comfortable drive.</p>
         <ul class="service-items">
@@ -275,7 +278,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-2">
-        <div class="service-icon">🛞</div>
+        <div class="service-icon"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i></div>
         <h3>Tyre Sales &amp; Repair</h3>
         <p>New tyres for all vehicle types plus puncture repair and greasing services.</p>
         <ul class="service-items">
@@ -292,7 +295,7 @@
   <div id="tab-carwash" class="tab-panel" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">💧</div>
+        <div class="service-icon"><i class="fa-solid fa-car-wash" aria-hidden="true"></i></div>
         <h3>Car Wash</h3>
         <p>Professional exterior and interior cleaning to keep your vehicle spotless.</p>
         <ul class="service-items">
@@ -303,7 +306,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon">✨</div>
+        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
         <h3>Detailing &amp; Buffing</h3>
         <p>Full vehicle detailing for that factory-fresh look inside and out.</p>
         <ul class="service-items">
@@ -320,7 +323,7 @@
   <div id="tab-spares" class="tab-panel" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">🛒</div>
+        <div class="service-icon"><i class="fa-solid fa-store" aria-hidden="true"></i></div>
         <h3>Spare Parts Shop</h3>
         <p>Genuine and quality aftermarket parts stocked for all major vehicle models.</p>
         <ul class="service-items">
@@ -333,7 +336,7 @@
         </ul>
       </div>
       <div class="service-card highlight-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon highlight-icon">📦</div>
+        <div class="service-icon highlight-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
         <h3>Parts Ordering</h3>
         <p>Can't find what you need? We source parts on request for any make or model.</p>
         <ul class="service-items">
@@ -350,7 +353,7 @@
   <div id="tab-other" class="tab-panel" role="tabpanel">
     <div class="services-grid">
       <div class="service-card reveal reveal-up">
-        <div class="service-icon">🔩</div>
+        <div class="service-icon"><i class="fa-solid fa-gear" aria-hidden="true"></i></div>
         <h3>Bearing &amp; Bush Pressing</h3>
         <p>Precision pressing of wheel bearings and suspension bushes using hydraulic equipment.</p>
         <ul class="service-items">
@@ -360,7 +363,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-1">
-        <div class="service-icon">🏎️</div>
+        <div class="service-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
         <h3>Speed Governor Fitting</h3>
         <p>NTSA-compliant speed governor installation and calibration for PSVs and commercial vehicles.</p>
         <ul class="service-items">
@@ -370,7 +373,7 @@
         </ul>
       </div>
       <div class="service-card reveal reveal-up reveal-delay-2">
-        <div class="service-icon">🔥</div>
+        <div class="service-icon"><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i></div>
         <h3>Welding</h3>
         <p>Arc and MIG welding for exhaust repairs, chassis work, and custom fabrication.</p>
         <ul class="service-items">
@@ -400,7 +403,7 @@
   </p>
 
   <div class="pricing-note reveal reveal-scale reveal-delay-3">
-    <span>ℹ️</span>
+    <span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span>
     Prices shown are estimates. Contact us for a precise quote on your specific
     vehicle. Insurance claims handled on your behalf.
   </div>
@@ -410,7 +413,7 @@
     <!-- Routine Maintenance -->
     <div class="price-card featured reveal reveal-up">
       <div class="price-header">
-        <span class="price-header-icon">⚙️</span>
+        <span class="price-header-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span>
         <h3>Routine Maintenance</h3>
         <span class="badge">POPULAR</span>
       </div>
@@ -430,7 +433,7 @@
     <!-- Tyre Centre -->
     <div class="price-card reveal reveal-up reveal-delay-1">
       <div class="price-header">
-        <span class="price-header-icon">🛞</span>
+        <span class="price-header-icon"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i></span>
         <h3>Tyre Centre</h3>
       </div>
       <div class="price-rows">
@@ -449,7 +452,7 @@
     <!-- Body Work -->
     <div class="price-card reveal reveal-up reveal-delay-2">
       <div class="price-header">
-        <span class="price-header-icon">🎨</span>
+        <span class="price-header-icon"><i class="fa-solid fa-spray-can-sparkles" aria-hidden="true"></i></span>
         <h3>Body Work</h3>
       </div>
       <div class="price-rows">
@@ -468,7 +471,7 @@
     <!-- Car Wash & Detailing -->
     <div class="price-card reveal reveal-up reveal-delay-3">
       <div class="price-header">
-        <span class="price-header-icon">💧</span>
+        <span class="price-header-icon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span>
         <h3>Car Wash &amp; Detailing</h3>
       </div>
       <div class="price-rows">
@@ -487,7 +490,7 @@
     <!-- Other Services -->
     <div class="price-card reveal reveal-up reveal-delay-4">
       <div class="price-header">
-        <span class="price-header-icon">🔩</span>
+        <span class="price-header-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
         <h3>Other Services</h3>
       </div>
       <div class="price-rows">
@@ -637,11 +640,11 @@
         <div class="about-block-label">Day Service Available</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-2">
-        <div class="about-block-num accent-turquoise">📱</div>
+        <div class="about-block-num accent-turquoise"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></div>
         <div class="about-block-label">WhatsApp Status Updates</div>
       </div>
       <div class="about-block reveal reveal-scale reveal-delay-3">
-        <div class="about-block-num accent-red">🏅</div>
+        <div class="about-block-num accent-red"><i class="fa-solid fa-medal" aria-hidden="true"></i></div>
         <div class="about-block-label">Certified Technicians</div>
       </div>
     </div>
@@ -672,7 +675,7 @@
     <input 
       type="text" 
       class="blog-search-input" 
-      placeholder="🔍 Search posts..." 
+      placeholder="Search posts..." 
       aria-label="Search blog posts"
     />
   </div>
@@ -739,7 +742,7 @@
     <!-- Contact info cards -->
     <div class="contact-info">
       <div class="contact-item reveal reveal-left">
-        <div class="contact-item-icon">📞</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
         <div>
           <div class="contact-item-label">Phone / WhatsApp</div>
           <div class="contact-item-value">
@@ -749,7 +752,7 @@
       </div>
 
       <div class="contact-item reveal reveal-left reveal-delay-1">
-        <div class="contact-item-icon">✉️</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
         <div>
           <div class="contact-item-label">Email</div>
           <div class="contact-item-value">
@@ -761,7 +764,7 @@
       </div>
 
       <div class="contact-item reveal reveal-left reveal-delay-2">
-        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
         <div>
           <div class="contact-item-label">Location</div>
           <div class="contact-item-value">
@@ -775,7 +778,7 @@
       </div>
 
       <div class="contact-item reveal reveal-left reveal-delay-3">
-        <div class="contact-item-icon">🕒</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
         <div>
           <div class="contact-item-label">Working Hours</div>
           <div class="contact-item-value">
@@ -838,7 +841,7 @@
       </div>
 
       <button id="enquiry-submit" class="btn-primary btn-full-width">
-        📧 Send Enquiry
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Enquiry
       </button>
     </div>
 
@@ -870,6 +873,47 @@
   });
 </script>
 <script src="js/main.js"></script>
+
+<script>
+/* ── Icon & Button Animation Observer ── */
+(function () {
+  /* Watch #enquiry-submit separately since it's not a .reveal element */
+  const btn = document.getElementById('enquiry-submit');
+  if (btn) {
+    const btnObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            btnObs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    btnObs.observe(btn);
+  }
+
+  /* Re-run icon stagger whenever a tab panel is activated
+     so icons animate in when switching tabs, not just on first load */
+  document.querySelectorAll('.tab-btn').forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => {
+      const panelId = tabBtn.dataset.tab;
+      const panel = document.getElementById('tab-' + panelId);
+      if (!panel) return;
+      /* Reset then re-trigger so animation replays on tab switch */
+      panel.querySelectorAll('.service-icon').forEach(icon => {
+        icon.style.animation = 'none';
+        icon.style.opacity   = '0';
+        /* Force reflow */
+        void icon.offsetWidth;
+        icon.style.animation = '';
+        icon.style.opacity   = '';
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

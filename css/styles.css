@@ -1379,3 +1379,203 @@ footer {
   .hero-actions { flex-direction: column; }
   .btn-primary, .btn-outline { justify-content: center; }
 }
+
+/* ── 15. FONT AWESOME ICON ADJUSTMENTS ── */
+
+/* Service icons — FA inherits box sizing from parent flex container */
+.service-icon i,
+.highlight-icon i {
+  font-size: 22px;
+  color: var(--turquoise);
+  line-height: 1;
+}
+
+/* Pricing card header icons */
+.price-header-icon i {
+  font-size: 20px;
+  color: var(--turquoise);
+}
+
+/* Contact item icons */
+.contact-item-icon i {
+  font-size: 20px;
+  color: var(--turquoise);
+}
+
+/* Theme toggle — icon color matches current theme */
+.theme-toggle i {
+  color: var(--turquoise);
+  font-size: 16px;
+  transition: color 0.3s;
+}
+body.light .theme-toggle i { color: var(--turquoise); }
+
+/* Mobile menu nav icons */
+.mobile-menu a i {
+  width: 20px;
+  text-align: center;
+  color: var(--turquoise);
+  font-size: 15px;
+}
+
+/* Services tab icons */
+.tab-btn i {
+  font-size: 13px;
+  color: inherit;
+  margin-right: 2px;
+}
+
+/* About section stat block icons (WhatsApp / Medal) */
+.about-block-num i {
+  font-size: 36px;
+  line-height: 1;
+}
+
+/* Pricing note info icon */
+.pricing-note i {
+  font-size: 16px;
+  color: var(--turquoise);
+}
+
+/* Hero button icons */
+.btn-primary i,
+.btn-outline i {
+  font-size: 14px;
+}
+
+/* Blog search — add search icon via wrapper */
+.blog-search {
+  position: relative;
+}
+.blog-search::before {
+  content: '\f002'; /* fa-magnifying-glass */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+.blog-search-input {
+  padding-left: 42px !important;
+}
+
+/* Submit button icon */
+#enquiry-submit i {
+  font-size: 14px;
+}
+
+/* ── 16. ICON & BUTTON ENTRANCE ANIMATIONS ── */
+
+/* ── Keyframes ── */
+@keyframes iconPop {
+  0%   { opacity: 0; transform: scale(0.4) rotate(-15deg); }
+  65%  { opacity: 1; transform: scale(1.15) rotate(4deg); }
+  85%  { transform: scale(0.95) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes iconSpinIn {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-180deg); }
+  70%  { opacity: 1; transform: scale(1.1) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes iconBounceUp {
+  0%   { opacity: 0; transform: translateY(28px) scale(0.7); }
+  60%  { opacity: 1; transform: translateY(-6px) scale(1.08); }
+  80%  { transform: translateY(3px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,188,212,0); }
+  50%       { box-shadow: 0 0 18px 4px rgba(0,188,212,0.35); }
+}
+
+@keyframes btnReadyPulse {
+  0%   { opacity: 0; transform: translateY(16px) scale(0.95); }
+  60%  { opacity: 1; transform: translateY(-3px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes iconShake {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-12deg); }
+  40%  { transform: rotate(10deg); }
+  60%  { transform: rotate(-6deg); }
+  80%  { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ── Service card icons: hidden until card becomes visible ── */
+.service-icon {
+  opacity: 0;
+  transform: scale(0.4) rotate(-15deg);
+  transition: none; /* let animation handle it */
+}
+
+.service-card.visible .service-icon {
+  animation: iconPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.12s;
+}
+
+/* Stagger icons across sibling cards */
+.service-card.visible:nth-child(2) .service-icon { animation-delay: 0.20s; }
+.service-card.visible:nth-child(3) .service-icon { animation-delay: 0.28s; }
+.service-card.visible:nth-child(4) .service-icon { animation-delay: 0.36s; }
+
+/* After animation completes, icon glows briefly */
+.service-card.visible .service-icon {
+  animation: iconPop 0.65s cubic-bezier(0.34,1.56,0.64,1) both,
+             glowPulse 0.8s ease 0.7s 1;
+}
+
+/* Hover micro-interaction: shake icon on card hover */
+.service-card:hover .service-icon i {
+  animation: iconShake 0.5s ease;
+}
+
+/* ── Pricing header icons: spin in ── */
+.price-header-icon {
+  opacity: 0;
+  transform: scale(0.3) rotate(-180deg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-card.visible .price-header-icon {
+  animation: iconSpinIn 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation-delay: 0.08s;
+}
+
+.price-card.visible:nth-child(2) .price-header-icon { animation-delay: 0.14s; }
+.price-card.visible:nth-child(3) .price-header-icon { animation-delay: 0.20s; }
+.price-card.visible:nth-child(4) .price-header-icon { animation-delay: 0.26s; }
+.price-card.visible:nth-child(5) .price-header-icon { animation-delay: 0.32s; }
+
+/* Hover: spin icon on pricing card hover */
+.price-card:hover .price-header-icon i {
+  animation: iconShake 0.45s ease;
+}
+
+/* ── Send Enquiry button: bounce up when contact section is visible ── */
+#enquiry-submit {
+  opacity: 0;
+  transform: translateY(16px) scale(0.95);
+}
+
+#enquiry-submit.visible {
+  animation: btnReadyPulse 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+/* Hover: icon wiggles inside the button */
+#enquiry-submit:hover i {
+  animation: iconShake 0.45s ease;
+  display: inline-block;
+}
