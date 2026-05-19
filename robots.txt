@@ -1,4 +1,16 @@
+# robots.txt — Turquoise Auto Centre Ltd
+# https://www.turquoiseautocentre.co.ke
+
+# Allow all search engine crawlers
 User-agent: *
 Allow: /
 
-Sitemap: https://turquoiseautocentre.co.ke/sitemap.xml
+# Block access to server-side / config files
+Disallow: /scripts/config.js
+Disallow: /.env
+Disallow: /.env.local
+Disallow: /node_modules/
+Disallow: /supabase/
+
+# Sitemap location
+Sitemap: https://www.turquoiseautocentre.co.ke/sitemap.xml

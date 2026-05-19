@@ -47,6 +47,11 @@
   <!-- Browser chrome colour (Android address bar, Windows taskbar) -->
   <meta name="theme-color" content="#00bcd4" />
 
+  <!-- Preload first hero slide so no black-flash on load -->
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1632823471406-4c5c7e4c6f24?w=1600&q=80&fit=crop&auto=format"
+    fetchpriority="high" />
+
   <!-- Preconnect for speed -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,10 +62,68 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <!-- Google Analytics 4 — loaded only after cookie consent -->
+  <!-- GA snippet injected by analytics.js after consent -->
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════
+     JSON-LD STRUCTURED DATA (LocalBusiness)
+     Helps Google show your business in Maps,
+     Knowledge Panel, and local search results.
+══════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Turquoise Auto Centre Ltd",
+  "alternateName": "Turquoise Auto Centre",
+  "description": "Full-spectrum auto care in Juja, Kiambu County — panel beating, spray painting, wheel alignment, tyre services, mechanical repairs, car wash and more.",
+  "url": "https://www.turquoiseautocentre.co.ke",
+  "logo": "https://www.turquoiseautocentre.co.ke/turquoise-auto-logo.png",
+  "image": "https://www.turquoiseautocentre.co.ke/turquoise-auto-logo.png",
+  "telephone": "+254116967804",
+  "email": "turquoiseautocentreltd@gmail.com",
+  "priceRange": "KES",
+  "currenciesAccepted": "KES",
+  "paymentAccepted": "Cash, M-Pesa, Bank Transfer",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Opposite St. Peter's School, Juja",
+    "addressLocality": "Juja",
+    "addressRegion": "Kiambu County",
+    "addressCountry": "KE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -1.0974,
+    "longitude": 36.9908
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:30",
+      "closes": "18:00"
+    }
+  ],
+  "sameAs": [],
+  "hasMap": "https://maps.google.com/?q=Juja+Kiambu+County+Kenya",
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -1.0974, "longitude": 36.9908 },
+    "geoRadius": "30000"
+  },
+  "serviceType": [
+    "Panel Beating","Spray Painting","Windscreen Replacement","Wheel Alignment",
+    "Wheel Balancing","Tyre Fitting","Car Wash","Detailing","Mechanical Repairs",
+    "Electrical Repairs","Routine Maintenance","Speed Governor Fitting","Welding"
+  ]
+}
+</script>
 
 <!-- ══════════════════════════════════════════
      TOAST NOTIFICATION CONTAINER
@@ -719,6 +782,65 @@
 
 
 <!-- ══════════════════════════════════════════
+     COOKIE CONSENT BANNER
+══════════════════════════════════════════ -->
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-text">
+      <i class="fa-solid fa-cookie-bite cookie-icon" aria-hidden="true"></i>
+      <div>
+        <strong>We use cookies</strong>
+        <span>We use Google Analytics to understand how visitors use our site. No personal data is sold. You can opt out at any time.</span>
+      </div>
+    </div>
+    <div class="cookie-banner-actions">
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept</button>
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     WHATSAPP CHAT BUBBLE
+══════════════════════════════════════════ -->
+<div id="wa-chat-bubble" class="wa-chat-bubble" aria-live="polite" role="dialog" aria-label="WhatsApp chat">
+  <!-- Greeting popup -->
+  <div id="wa-greeting" class="wa-greeting" aria-hidden="true">
+    <button class="wa-greeting-close" id="wa-greeting-close" aria-label="Close greeting">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <div class="wa-greeting-avatar">
+      <img src="turquoise-auto-logo.png" alt="Turquoise Auto Centre" width="40" height="40" />
+      <span class="wa-online-dot" aria-hidden="true"></span>
+    </div>
+    <div class="wa-greeting-body">
+      <div class="wa-greeting-name">Turquoise Auto Centre</div>
+      <div class="wa-greeting-status">Typically replies within minutes</div>
+      <div class="wa-greeting-message">
+        Hi! 👋 How can we help with your vehicle today?
+      </div>
+      <a
+        href="https://wa.me/254116967804?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20a%20service%20at%20Turquoise%20Auto%20Centre."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wa-greeting-cta"
+      >
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Start Chat
+      </a>
+    </div>
+  </div>
+  <!-- Toggle button -->
+  <button id="wa-toggle" class="wa-toggle-btn" aria-label="Open WhatsApp chat" aria-expanded="false">
+    <i class="fa-brands fa-whatsapp wa-icon-open" aria-hidden="true"></i>
+    <i class="fa-solid fa-xmark wa-icon-close" aria-hidden="true"></i>
+    <span class="wa-toggle-badge" id="wa-badge" aria-label="1 new message">1</span>
+  </button>
+</div>
+
+
+<!-- ══════════════════════════════════════════
      FLOATING WHATSAPP BUTTON
 ══════════════════════════════════════════ -->
 <a
@@ -752,6 +874,7 @@
     window.blogSystemSupabase = new BlogSystemSupabase(BLOG_CONFIG);
   });
 </script>
+<script src="js/analytics.js"></script>
 <script src="js/main.js"></script>
 
 </body>
