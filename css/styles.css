@@ -2380,7 +2380,7 @@ body.light .theme-toggle i { color: var(--turquoise); }
 }
 
 .wa-greeting-body {
-  padding: 16px 16px 18px;
+  padding: 14px 14px 16px;
   position: relative;
 }
 
@@ -2389,6 +2389,7 @@ body.light .theme-toggle i { color: var(--turquoise); }
   width: 44px;
   height: 44px;
   margin-bottom: 10px;
+  margin-top: 4px;
 }
 
 .wa-greeting-avatar img {
@@ -2396,7 +2397,8 @@ body.light .theme-toggle i { color: var(--turquoise); }
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(37,211,102,0.4);
+  border: 2px solid rgba(37,211,102,0.5);
+  background: var(--card-bg);
 }
 
 .wa-online-dot {
@@ -2415,7 +2417,7 @@ body.light .theme-toggle i { color: var(--turquoise); }
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1px;
+  margin-bottom: 3px;
 }
 
 .wa-greeting-status {
@@ -2423,6 +2425,9 @@ body.light .theme-toggle i { color: var(--turquoise); }
   color: #25D366;
   margin-bottom: 12px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 /* Chat bubble style message */

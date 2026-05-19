@@ -63,16 +63,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Google Analytics 4 — loaded only after cookie consent -->
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBTCFBE0Q4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NBTCFBE0Q4', {
-      anonymize_ip: true
-    });
-  </script>
+  <!-- GA snippet injected by analytics.js after consent -->
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -813,22 +804,40 @@
 <!-- ══════════════════════════════════════════
      WHATSAPP CHAT BUBBLE
 ══════════════════════════════════════════ -->
-<div id="wa-chat-bubble" class="wa-chat-bubble" aria-live="polite" role="dialog" aria-label="WhatsApp chat">
-  <!-- Greeting popup -->
+<div id="wa-chat-bubble" class="wa-chat-bubble" aria-label="WhatsApp chat">
+
+  <!-- Greeting card — hidden until triggered -->
   <div id="wa-greeting" class="wa-greeting" aria-hidden="true">
-    <button class="wa-greeting-close" id="wa-greeting-close" aria-label="Close greeting">
-      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
-    <div class="wa-greeting-avatar">
-      <img src="turquoise-auto-logo.png" alt="Turquoise Auto Centre" width="40" height="40" />
-      <span class="wa-online-dot" aria-hidden="true"></span>
-    </div>
+
+    <!-- Green header bar (CSS ::before) -->
+
+    <!-- Body content -->
     <div class="wa-greeting-body">
+
+      <!-- Close button -->
+      <button class="wa-greeting-close" id="wa-greeting-close" aria-label="Close">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+
+      <!-- Avatar + online dot -->
+      <div class="wa-greeting-avatar">
+        <img src="turquoise-auto-logo.png" alt="Turquoise Auto Centre" width="44" height="44" />
+        <span class="wa-online-dot" aria-hidden="true"></span>
+      </div>
+
+      <!-- Name & status -->
       <div class="wa-greeting-name">Turquoise Auto Centre</div>
-      <div class="wa-greeting-status">Typically replies within minutes</div>
+      <div class="wa-greeting-status">
+        <i class="fa-solid fa-circle" style="font-size:7px;color:#25D366;" aria-hidden="true"></i>
+        Typically replies within minutes
+      </div>
+
+      <!-- Message bubble -->
       <div class="wa-greeting-message">
         Hi! 👋 How can we help with your vehicle today?
       </div>
+
+      <!-- CTA button -->
       <a
         href="https://wa.me/254116967804?text=Hello%2C%20I%27d%20like%20to%20enquire%20about%20a%20service%20at%20Turquoise%20Auto%20Centre."
         target="_blank"
@@ -836,17 +845,20 @@
         class="wa-greeting-cta"
       >
         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-        Start Chat
+        Start Chat on WhatsApp
       </a>
-    </div>
-  </div>
+
+    </div><!-- /wa-greeting-body -->
+  </div><!-- /wa-greeting -->
+
   <!-- Toggle button -->
   <button id="wa-toggle" class="wa-toggle-btn" aria-label="Open WhatsApp chat" aria-expanded="false">
     <i class="fa-brands fa-whatsapp wa-icon-open" aria-hidden="true"></i>
     <i class="fa-solid fa-xmark wa-icon-close" aria-hidden="true"></i>
     <span class="wa-toggle-badge" id="wa-badge" aria-label="1 new message">1</span>
   </button>
-</div>
+
+</div><!-- /wa-chat-bubble -->
 
 
 <!-- ══════════════════════════════════════════

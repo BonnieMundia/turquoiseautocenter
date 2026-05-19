@@ -22,7 +22,7 @@
 /* ─────────────────────────────────────────────
    CONFIGURATION — update these values
 ───────────────────────────────────────────── */
-const GA_MEASUREMENT_ID = 'G-NBTCFBE0Q4'; // ← Replace with your real GA4 ID
+const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // ← Replace with your real GA4 ID
 const CONSENT_KEY       = 'tac-cookie-consent'; // localStorage key
 const WA_SHOWN_KEY      = 'tac-wa-greeting-shown';
 
@@ -84,11 +84,8 @@ if (declineBtn) declineBtn.addEventListener('click',  declineCookies);
 let gaLoaded = false;
 
 function loadGA() {
-  if (gaLoaded) return;
+  if (gaLoaded || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
   gaLoaded = true;
-  // GA already loaded by the inline script in index.html
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
 
   // Inject gtag script
   const script = document.createElement('script');
@@ -118,10 +115,15 @@ function loadGA() {
 }
 
 function trackEvent(eventName, params = {}) {
+  // Safe to call anytime — fires only if GA is loaded
   if (typeof window.gtag === 'function') {
     window.gtag('event', eventName, params);
   }
 }
+
+// Make trackEvent globally available so bubble code can call it
+// even before GA consent is given (it will just no-op safely)
+window.tacTrack = trackEvent;
 
 
 /* ═══════════════════════════════════════════════════════
@@ -226,6 +228,7 @@ function initTracking() {
       - Greeting pops up after 8 seconds (once per session)
       - Toggle button opens/closes the card
       - Badge disappears once opened
+      - Hides when contact section is visible
    ═══════════════════════════════════════════════════════ */
 (function initWAChatBubble() {
   const bubble   = document.getElementById('wa-chat-bubble');
@@ -234,7 +237,10 @@ function initTracking() {
   const closeBtn = document.getElementById('wa-greeting-close');
   const badge    = document.getElementById('wa-badge');
 
-  if (!bubble || !greeting || !toggle) return;
+  if (!bubble || !greeting || !toggle) {
+    console.warn('[WA Bubble] Missing elements — check HTML IDs');
+    return;
+  }
 
   let greetingOpen = false;
 
@@ -243,10 +249,13 @@ function initTracking() {
     greeting.setAttribute('aria-hidden', 'false');
     toggle.setAttribute('aria-expanded', 'true');
     toggle.classList.add('wa-open');
+    bubble.classList.add('wa-bubble-active');
     if (badge) badge.classList.add('wa-badge-hidden');
     greetingOpen = true;
-    // Track
-    trackEvent('wa_chat_bubble_opened', { event_category: 'engagement' });
+    // Fire tracking if GA is loaded (safe no-op if not)
+    if (typeof window.tacTrack === 'function') {
+      window.tacTrack('wa_chat_bubble_opened', { event_category: 'engagement' });
+    }
   }
 
   function closeGreeting() {
@@ -254,24 +263,35 @@ function initTracking() {
     greeting.setAttribute('aria-hidden', 'true');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.classList.remove('wa-open');
+    bubble.classList.remove('wa-bubble-active');
     greetingOpen = false;
   }
 
   // Toggle on button click
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     greetingOpen ? closeGreeting() : openGreeting();
   });
 
-  // Close on X
-  if (closeBtn) closeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeGreeting();
-    sessionStorage.setItem(WA_SHOWN_KEY, 'true');
-  });
+  // Close on X button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeGreeting();
+      sessionStorage.setItem(WA_SHOWN_KEY, 'true');
+    });
+  }
 
   // Close on outside click
   document.addEventListener('click', (e) => {
-    if (greetingOpen && !bubble.contains(e.target)) closeGreeting();
+    if (greetingOpen && !bubble.contains(e.target)) {
+      closeGreeting();
+    }
+  });
+
+  // Escape key closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && greetingOpen) closeGreeting();
   });
 
   // Auto-show greeting after 8 seconds (once per session)
@@ -282,20 +302,19 @@ function initTracking() {
       sessionStorage.setItem(WA_SHOWN_KEY, 'true');
     }, 8000);
   } else {
-    // Already shown this session — just show the button quietly (no badge)
+    // Shown before this session — hide badge silently
     if (badge) badge.classList.add('wa-badge-hidden');
   }
 
-  // Hide chat bubble when contact section is on screen
-  // (already handled by whatsapp-fab logic in main.js but we mirror it for the bubble)
+  // Hide bubble when contact section is on screen
   const contactEl = document.getElementById('contact');
   if (contactEl) {
-    const contactObs = new IntersectionObserver((entries) => {
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         bubble.classList.toggle('wa-bubble-hidden', e.isIntersecting);
         if (e.isIntersecting && greetingOpen) closeGreeting();
       });
-    }, { threshold: 0.2 });
-    contactObs.observe(contactEl);
+    }, { threshold: 0.15 });
+    obs.observe(contactEl);
   }
 })();
