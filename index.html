@@ -63,7 +63,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Google Analytics 4 — loaded only after cookie consent -->
-  <!-- GA snippet injected by analytics.js after consent -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBTCFBE0Q4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NBTCFBE0Q4', {
+      anonymize_ip: true
+    });
+  </script>
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />

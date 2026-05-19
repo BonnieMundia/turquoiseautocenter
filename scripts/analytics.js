@@ -84,8 +84,11 @@ if (declineBtn) declineBtn.addEventListener('click',  declineCookies);
 let gaLoaded = false;
 
 function loadGA() {
-  if (gaLoaded || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+  if (gaLoaded) return;
   gaLoaded = true;
+  // GA already loaded by the inline script in index.html
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
 
   // Inject gtag script
   const script = document.createElement('script');
