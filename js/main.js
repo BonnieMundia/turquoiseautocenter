@@ -385,6 +385,14 @@ if (contactSubmitBtn) {
   contactSubmitBtn.addEventListener('click', async (e) => {
     e.preventDefault();
 
+    // Honeypot — if filled, silently fake success (bot submission)
+    const honeypot = document.getElementById('hp-name');
+    if (honeypot && honeypot.value) {
+      contactSubmitBtn.disabled = true;
+      contactSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Sent!';
+      return;
+    }
+
     if (!validateForm()) {
       document.querySelector('.input-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -568,6 +576,35 @@ window.addEventListener('scroll', () => {
     ticking = true;
   }
 }, { passive: true });
+
+
+/* ═══════════════════════════════════════════════════════
+   16. LAZY GOOGLE MAPS (IntersectionObserver)
+   ═══════════════════════════════════════════════════════ */
+(function initLazyMaps() {
+  const frames = document.querySelectorAll('iframe[data-src]');
+  if (!frames.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const iframe = entry.target;
+      iframe.src = iframe.dataset.src;
+      obs.unobserve(iframe);
+    });
+  }, { rootMargin: '200px' });
+  frames.forEach(f => obs.observe(f));
+})();
+
+
+/* ═══════════════════════════════════════════════════════
+   17. SERVICE WORKER REGISTRATION
+   ═══════════════════════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(err => console.warn('SW registration failed:', err));
+  });
+}
 
 
 /* ═══════════════════════════════════════════════════════

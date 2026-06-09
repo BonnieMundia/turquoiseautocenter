@@ -42,13 +42,71 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome (non-blocking) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /></noscript>
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",   "item": "https://www.turquoiseautocentre.co.ke/" },
+    { "@type": "ListItem", "position": 2, "name": "FAQ",    "item": "https://www.turquoiseautocentre.co.ke/faq.html" }
+  ]
+}
+</script>
+
+<!-- FAQPage Schema — enables Google rich snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you work with insurance companies?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We are approved repairers for Occidental Insurance Company Ltd and Geminia Insurance Company Ltd, among others. We handle the full claims process on your behalf — just bring your vehicle and your claim number and we take care of the rest." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a typical repair take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Routine maintenance like oil changes and tyre services are usually completed same-day. Minor body repairs take 1–3 days depending on parts availability. Major accident repairs and full resprays may take 5–10 working days." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide updates while my car is being repaired?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We send progress updates via WhatsApp so you always know what's happening with your vehicle. No need to call and follow up — we keep you in the loop proactively." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where exactly are you located?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We are in Juja, opposite St. Peter's School — just 0.5 km from the Thika Superhighway. From Nairobi, take Exit 15 off the superhighway." }
+    },
+    {
+      "@type": "Question",
+      "name": "What vehicle brands do you work on?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We service all major brands including Toyota, Nissan, Mazda, Ford, Mercedes-Benz, Isuzu, and more. Our spare parts shop stocks parts for all these models, and we can special-order parts for less common vehicles too." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to book an appointment in advance?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Walk-ins are welcome for most services, especially car washes, tyre services, and routine maintenance. For major mechanical work or body repairs, we recommend booking in advance. Call or WhatsApp us on +254 116 967804." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your prices fixed or can I negotiate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The prices shown on this website are estimates. Final pricing depends on your specific vehicle make, model, and the extent of work needed. We always provide a clear written quote before starting any work — no hidden charges, ever." }
+    }
+  ]
+}
+</script>
 
 <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -231,9 +289,9 @@
 
 
 <!-- SCRIPTS -->
-<script src="js/config.js"></script>
-<script src="js/analytics.js"></script>
-<script src="js/main.js"></script>
+<script src="js/config.js" defer></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>

@@ -2590,3 +2590,18 @@ body.light .theme-toggle i { color: var(--turquoise); }
     rgba(0,0,0,0.08) 100%
   );
 }
+
+
+/* ══════════════════════════════════════════════════════
+   HONEYPOT — visually hidden, catches bots
+   ══════════════════════════════════════════════════════ */
+.hp-wrap {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

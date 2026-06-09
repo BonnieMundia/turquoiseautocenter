@@ -42,13 +42,26 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome (non-blocking) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /></noscript>
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",    "item": "https://www.turquoiseautocentre.co.ke/" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.turquoiseautocentre.co.ke/contact.html" }
+  ]
+}
+</script>
 
 <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -157,7 +170,7 @@
       <div class="map-embed reveal reveal-left reveal-delay-4">
         <iframe
           title="Turquoise Auto Centre — Juja location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.047!2d36.9908!3d-1.0974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f3f7c3a5c6e67%3A0x25b3f0f7fce0b5da!2sJuja%2C%20Kiambu%20County!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
+          data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.047!2d36.9908!3d-1.0974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f3f7c3a5c6e67%3A0x25b3f0f7fce0b5da!2sJuja%2C%20Kiambu%20County!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
           width="100%" height="210" style="border:0; border-radius:8px;"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
@@ -214,6 +227,12 @@
       <div class="form-group">
         <label for="details">Additional Details</label>
         <textarea id="details" placeholder="Describe the issue or service needed..."></textarea>
+      </div>
+
+      <!-- Honeypot — hidden from humans, catches bots -->
+      <div class="hp-wrap" aria-hidden="true">
+        <label for="hp-name">Leave this blank</label>
+        <input type="text" id="hp-name" name="hp-name" tabindex="-1" autocomplete="off" />
       </div>
 
       <button id="enquiry-submit" class="btn-primary btn-full-width">
@@ -314,9 +333,9 @@
 
 
 <!-- SCRIPTS -->
-<script src="js/config.js"></script>
-<script src="js/analytics.js"></script>
-<script src="js/main.js"></script>
+<script src="js/config.js" defer></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>

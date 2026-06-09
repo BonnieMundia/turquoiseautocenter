@@ -42,13 +42,26 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome (non-blocking) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /></noscript>
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.turquoiseautocentre.co.ke/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.turquoiseautocentre.co.ke/blog.html" }
+  ]
+}
+</script>
 
 <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -223,15 +236,15 @@
 
 
 <!-- SCRIPTS -->
-<script src="js/config.js"></script>
-<script src="js/blog-supabase.js"></script>
+<script src="js/config.js" defer></script>
+<script src="js/blog-supabase.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     window.blogSystemSupabase = new BlogSystemSupabase(BLOG_CONFIG);
   });
 </script>
-<script src="js/analytics.js"></script>
-<script src="js/main.js"></script>
+<script src="js/analytics.js" defer></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>
