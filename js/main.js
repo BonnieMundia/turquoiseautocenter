@@ -35,7 +35,7 @@ const whatsappFab      = document.getElementById('whatsapp-fab');
 
 const THEME_KEY    = 'tac-theme';
 const LAST_TAB_KEY = 'tac-last-tab';
-const NAV_SECTIONS = ['home','services','pricing','faq','about','blog','contact'];
+const NAV_SECTIONS = ['home','services','pricing','faq','about','gallery','blog','contact'];
 const sections     = NAV_SECTIONS.map(id => document.getElementById(id)).filter(Boolean);
 
 let currentSectionId = null;
@@ -55,15 +55,15 @@ function applyTheme(theme) {
   document.body.classList.toggle('light', isLight);
   if (themeToggleBtn) {
     themeToggleBtn.innerHTML = isLight
-      ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
-      : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
+      ? '<i class="fa-solid fa-moon" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-sun" aria-hidden="true"></i>';
     themeToggleBtn.setAttribute('aria-label',
       isLight ? 'Switch to dark mode' : 'Switch to light mode');
   }
 }
 
 function initTheme() {
-  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  applyTheme(localStorage.getItem(THEME_KEY) || 'light');
 }
 
 if (themeToggleBtn) {
@@ -618,3 +618,97 @@ window.addEventListener('load', () => {
   updateBackToTop();
   updateWhatsappFab();
 });
+
+
+/* ── 18. GALLERY FILTER ── */
+(function initGalleryFilter() {
+  const filterBtns = document.querySelectorAll('.gallery-filter');
+  if (!filterBtns.length) return;
+  const items = document.querySelectorAll('.gallery-item');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      items.forEach(item => {
+        const match = cat === 'all' || item.dataset.category === cat;
+        item.style.display = match ? '' : 'none';
+      });
+    });
+  });
+})();
+
+/* ── 19. GALLERY LIGHTBOX ── */
+(function initGalleryLightbox() {
+  const lightbox = document.getElementById('gallery-lightbox');
+  if (!lightbox) return;
+  const lbImg   = document.getElementById('lb-img');
+  const lbCat   = document.getElementById('lb-cat');
+  const lbTitle = document.getElementById('lb-title');
+  const lbClose = document.getElementById('lb-close');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
+
+  let visible = [];
+  let current = 0;
+
+  function getVisible() {
+    return Array.from(document.querySelectorAll('.gallery-item')).filter(el => el.style.display !== 'none');
+  }
+
+  function open(idx) {
+    visible = getVisible();
+    current = idx;
+    show(current);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  function show(idx) {
+    const item = visible[idx];
+    if (!item) return;
+    const img = item.querySelector('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCat.textContent   = item.dataset.cat   || '';
+    lbTitle.textContent = item.dataset.title  || '';
+  }
+
+  // Open from expand button or click on item
+  document.querySelectorAll('.gallery-item').forEach((item, i) => {
+    const openLightbox = (e) => {
+      e.stopPropagation();
+      const visArr = getVisible();
+      const visIdx = visArr.indexOf(item);
+      if (visIdx !== -1) open(visIdx);
+    };
+    const expandBtn = item.querySelector('.gallery-expand');
+    if (expandBtn) expandBtn.addEventListener('click', openLightbox);
+    item.addEventListener('click', openLightbox);
+  });
+
+  lbClose.addEventListener('click', close);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+
+  lbPrev.addEventListener('click', () => {
+    current = (current - 1 + visible.length) % visible.length;
+    show(current);
+  });
+  lbNext.addEventListener('click', () => {
+    current = (current + 1) % visible.length;
+    show(current);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft')  { current = (current - 1 + visible.length) % visible.length; show(current); }
+    if (e.key === 'ArrowRight') { current = (current + 1) % visible.length; show(current); }
+  });
+})();

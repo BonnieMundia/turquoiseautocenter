@@ -58,4 +58,12 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Gallery page -->
+  <url>
+    <loc>https://www.turquoiseautocentre.co.ke/gallery.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
