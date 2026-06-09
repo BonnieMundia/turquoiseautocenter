@@ -5,55 +5,55 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.turquoiseautocentre.co.ke/</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Services section -->
+  <!-- Services page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#services</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/services.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Pricing section -->
+  <!-- Pricing page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#pricing</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/pricing.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- FAQ section -->
+  <!-- FAQ page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#faq</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/faq.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- About section -->
+  <!-- About page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#about</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/about.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Blog section -->
+  <!-- Blog page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#blog</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/blog.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
 
-  <!-- Contact section -->
+  <!-- Contact page -->
   <url>
-    <loc>https://www.turquoiseautocentre.co.ke/#contact</loc>
-    <lastmod>2026-05-19</lastmod>
+    <loc>https://www.turquoiseautocentre.co.ke/contact.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
