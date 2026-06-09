@@ -6,7 +6,7 @@
      - Network-only  → Supabase API calls
    ============================================================ */
 
-const CACHE_NAME    = 'tac-v1';
+const CACHE_NAME    = 'tac-v2';
 const OFFLINE_PAGE  = '/index.html';
 
 const PRECACHE = [
@@ -18,11 +18,12 @@ const PRECACHE = [
   '/about.html',
   '/blog.html',
   '/contact.html',
-  '/css/styles.css',
-  '/js/config.js',
-  '/js/main.js',
-  '/js/analytics.js',
-  '/js/blog-supabase.js',
+  '/gallery.html',
+  '/css/styles.css?v=2',
+  '/js/config.js?v=2',
+  '/js/main.js?v=2',
+  '/js/analytics.js?v=2',
+  '/js/blog-supabase.js?v=2',
   '/turquoise-auto-logo.png',
   '/favicon/favicon.ico',
   '/favicon/favicon-32x32.png',
