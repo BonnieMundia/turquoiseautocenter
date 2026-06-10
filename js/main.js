@@ -602,6 +602,18 @@ window.addEventListener('scroll', () => {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then(reg => {
+        // If a new SW takes control (new version activated), reload once
+        // so the page picks up fresh assets without a manual hard refresh.
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (sessionStorage.getItem('sw-reloaded')) return;
+          sessionStorage.setItem('sw-reloaded', '1');
+          window.location.reload();
+        });
+
+        // Check for an updated SW in the background
+        reg.update().catch(() => {});
+      })
       .catch(err => console.warn('SW registration failed:', err));
   });
 }

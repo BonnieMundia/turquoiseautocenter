@@ -6,7 +6,7 @@
      - Network-only  → Supabase API calls
    ============================================================ */
 
-const CACHE_NAME    = 'tac-v2';
+const CACHE_NAME    = 'tac-v3';
 const OFFLINE_PAGE  = '/index.html';
 
 const PRECACHE = [
@@ -28,6 +28,26 @@ const PRECACHE = [
   '/favicon/favicon.ico',
   '/favicon/favicon-32x32.png',
   '/site.webmanifest',
+  '/images/hero/hero-1.jpg',
+  '/images/hero/hero-2.jpg',
+  '/images/hero/hero-3.jpg',
+  '/images/hero/hero-4.jpg',
+  '/images/gallery/spray-painting.jpg',
+  '/images/gallery/auto-workshop.jpg',
+  '/images/gallery/panel-beating.jpg',
+  '/images/gallery/transformation.jpg',
+  '/images/gallery/paint-refresh.jpg',
+  '/images/gallery/car-wash.jpg',
+  '/images/gallery/detailing.jpg',
+  '/images/gallery/ferrari.jpg',
+  '/images/gallery/bmw.jpg',
+  '/images/gallery/engine.jpg',
+  '/images/gallery/mechanical.jpg',
+  '/images/gallery/juja-workshop.jpg',
+  '/images/gallery/service-bay.jpg',
+  '/images/blog/maintenance-tips.jpg',
+  '/images/blog/tyre-safety.jpg',
+  '/images/blog/engine-diagnostics.jpg',
 ];
 
 /* ── Install: pre-cache static shell ── */
