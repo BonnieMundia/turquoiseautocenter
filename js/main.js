@@ -410,7 +410,7 @@ if (contactSubmitBtn) {
 
     try {
       const response = await fetch(
-        'https://usencbuaumsgmitvlznt.supabase.co/functions/v1/submit-enquiry',
+        `https://us-central1-${FIREBASE_CONFIG.projectId}.cloudfunctions.net/submitEnquiry`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

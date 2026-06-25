@@ -237,11 +237,11 @@
 
 
 <!-- SCRIPTS -->
-<script src="js/config.js?v=2" defer></script>
-<script src="js/blog-supabase.js?v=2" defer></script>
-<script>
+<script src="js/config.js?v=3" defer></script>
+<script type="module">
+  import { BlogSystemFirebase } from './js/blog-firebase.js?v=1';
   document.addEventListener('DOMContentLoaded', () => {
-    window.blogSystemSupabase = new BlogSystemSupabase(BLOG_CONFIG);
+    window.blogSystemFirebase = new BlogSystemFirebase(FIREBASE_CONFIG);
   });
 </script>
 <script src="js/analytics.js?v=2" defer></script>

@@ -3,10 +3,10 @@
    Strategy:
      - Cache-first  → CSS, JS, fonts, images
      - Network-first → HTML pages (always fresh)
-     - Network-only  → Supabase API calls
+     - Network-only  → Firebase/Cloud Functions API calls
    ============================================================ */
 
-const CACHE_NAME    = 'tac-v3';
+const CACHE_NAME    = 'tac-v4';
 const OFFLINE_PAGE  = '/index.html';
 
 const PRECACHE = [
@@ -20,10 +20,10 @@ const PRECACHE = [
   '/contact.html',
   '/gallery.html',
   '/css/styles.css?v=2',
-  '/js/config.js?v=2',
+  '/js/config.js?v=3',
   '/js/main.js?v=2',
   '/js/analytics.js?v=2',
-  '/js/blog-supabase.js?v=2',
+  '/js/blog-firebase.js?v=1',
   '/turquoise-auto-logo.png',
   '/favicon/favicon.ico',
   '/favicon/favicon-32x32.png',
@@ -75,9 +75,10 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip non-GET and third-party API calls (Supabase, GA)
+  // Skip non-GET and third-party API calls (Firebase/Cloud Functions, GA)
   if (request.method !== 'GET') return;
-  if (url.hostname.includes('supabase.co')) return;
+  if (url.hostname.includes('googleapis.com')) return;
+  if (url.hostname.includes('cloudfunctions.net')) return;
   if (url.hostname.includes('google-analytics.com')) return;
   if (url.hostname.includes('googletagmanager.com')) return;
 

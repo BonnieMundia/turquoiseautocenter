@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Blog posts are publicly readable. All writes happen via the
+    // Firebase console or an admin tool, never from the public client.
+    match /posts/{postId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Enquiries are only ever written by the submitEnquiry Cloud Function,
+    // which uses the Admin SDK and bypasses these rules entirely.
+    // The public client never reads or writes this collection directly.
+    match /enquiries/{enquiryId} {
+      allow read, write: if false;
+    }
+  }
+}

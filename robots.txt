@@ -10,7 +10,7 @@ Disallow: /scripts/config.js
 Disallow: /.env
 Disallow: /.env.local
 Disallow: /node_modules/
-Disallow: /supabase/
+Disallow: /functions/
 
 # Sitemap location
 Sitemap: https://www.turquoiseautocentre.co.ke/sitemap.xml

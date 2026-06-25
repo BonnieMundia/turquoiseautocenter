@@ -5,8 +5,14 @@ js/config.js
 
 # Node/Dependencies
 node_modules/
+functions/node_modules/
 npm-debug.log
 package-lock.json
+
+# Firebase
+.firebase/
+*-service-account*.json
+firebase-debug.log
 
 # OS Files
 .DS_Store
