@@ -6,7 +6,8 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
-  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
   collection,
   query,
   orderBy,
@@ -19,7 +20,9 @@ import {
 export class BlogSystemFirebase {
   constructor(config = {}) {
     const app = initializeApp(config);
-    this.db = getFirestore(app);
+    // Persistent local cache: repeat visits and brief offline gaps still
+    // render the last-seen posts from IndexedDB instead of a blank grid.
+    this.db = initializeFirestore(app, { localCache: persistentLocalCache() });
     this.debug = config.debug || false;
 
     // Blog state
@@ -145,7 +148,7 @@ export class BlogSystemFirebase {
     this.blogGrid.innerHTML = this.posts.map((post, index) => `
       <div class="blog-card" style="animation: fadeIn 0.5s ease ${index * 0.1}s both;">
         <div class="blog-image">
-          <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=No+Image'}"
+          <img src="${post.thumbnail_url || post.image_url || 'https://via.placeholder.com/400x250?text=No+Image'}"
                alt="${post.title}"
                onerror="this.src='https://via.placeholder.com/400x250?text=Image+Not+Found'" />
           ${post.category ? `<span class="blog-category">${post.category}</span>` : ''}
@@ -290,7 +293,7 @@ export class BlogSystemFirebase {
           this.blogGrid.innerHTML = filtered.map((post, index) => `
             <div class="blog-card" style="animation: fadeIn 0.5s ease ${index * 0.1}s both;">
               <div class="blog-image">
-                <img src="${post.image_url || 'https://via.placeholder.com/400x250?text=No+Image'}"
+                <img src="${post.thumbnail_url || post.image_url || 'https://via.placeholder.com/400x250?text=No+Image'}"
                      alt="${post.title}"
                      onerror="this.src='https://via.placeholder.com/400x250?text=Image+Not+Found'" />
                 ${post.category ? `<span class="blog-category">${post.category}</span>` : ''}

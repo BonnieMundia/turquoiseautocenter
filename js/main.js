@@ -409,11 +409,12 @@ if (contactSubmitBtn) {
     contactSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Sending…';
 
     try {
+      const appCheckHeader = await window.getAppCheckHeader?.() || {};
       const response = await fetch(
         `https://us-central1-${FIREBASE_CONFIG.projectId}.cloudfunctions.net/submitEnquiry`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...appCheckHeader },
           body: JSON.stringify({ name, email, phone, service, vehicle, details }),
         }
       );

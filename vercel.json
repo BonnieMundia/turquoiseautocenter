@@ -26,7 +26,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://www.turquoiseautocentre.co.ke data: blob:; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://www.google-analytics.com https://analytics.google.com https://region1.analytics.google.com; frame-src https://www.google.com; worker-src 'self'; manifest-src 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://www.turquoiseautocentre.co.ke https://firebasestorage.googleapis.com https://images.unsplash.com data: blob:; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://www.google-analytics.com https://analytics.google.com https://region1.analytics.google.com https://www.google.com; frame-src https://www.google.com; worker-src 'self'; manifest-src 'self'"
         }
       ]
     },

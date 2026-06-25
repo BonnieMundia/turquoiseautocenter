@@ -11,6 +11,7 @@ Disallow: /.env
 Disallow: /.env.local
 Disallow: /node_modules/
 Disallow: /functions/
+Disallow: /admin.html
 
 # Sitemap location
 Sitemap: https://www.turquoiseautocentre.co.ke/sitemap.xml
