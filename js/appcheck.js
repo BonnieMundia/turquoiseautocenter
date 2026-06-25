@@ -7,14 +7,14 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
   initializeAppCheck,
-  ReCaptchaV3Provider,
+  ReCaptchaEnterpriseProvider,
   getToken,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
 
 if (FIREBASE_CONFIG.recaptchaSiteKey) {
   const app = initializeApp(FIREBASE_CONFIG, 'appcheck');
   const appCheck = initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider(FIREBASE_CONFIG.recaptchaSiteKey),
+    provider: new ReCaptchaEnterpriseProvider(FIREBASE_CONFIG.recaptchaSiteKey),
     isTokenAutoRefreshEnabled: true,
   });
 
