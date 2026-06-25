@@ -14,4 +14,4 @@ Disallow: /functions/
 Disallow: /admin.html
 
 # Sitemap location
-Sitemap: https://www.turquoiseautocentre.co.ke/sitemap.xml
+Sitemap: https://www.turquoiseautocentre.co.ke/sitemap-index.xml

@@ -131,6 +131,146 @@ exports.submitEnquiry = onRequest(
   }
 );
 
+const SITE_URL = 'https://www.turquoiseautocentre.co.ke';
+
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function siteHeaderFooter(activeIsBlog = true) {
+  return {
+    header: `
+<nav role="navigation" aria-label="Main navigation">
+  <a href="/index.html" class="nav-logo" aria-label="Turquoise Auto Centre home">
+    <div class="logo-icon" aria-hidden="true">
+      <img src="/turquoise-auto-logo.png" alt="Turquoise Auto Centre logo" width="40" height="40" />
+    </div>
+    <div class="logo-text">
+      <strong>TURQUOISE AUTO</strong>
+      <span>Centre Ltd</span>
+    </div>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/pricing.html">Pricing</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/gallery.html">Gallery</a></li>
+    <li><a href="/blog.html"${activeIsBlog ? ' class="active"' : ''}>Blog</a></li>
+    <li><a href="/contact.html" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>`,
+    footer: `
+<footer>
+  <div class="footer-copy">
+    © 2026 <strong>Turquoise Auto Centre Ltd</strong>
+    · Juja, Kiambu County · Reg. #023857
+  </div>
+  <div class="footer-tagline">HAPPINESS IS A SMOOTH RIDE</div>
+</footer>`,
+  };
+}
+
+// Renders a real, crawlable permalink page for a single blog post —
+// blog.html itself only ever shows posts inside a JS-built modal, which
+// is invisible to WhatsApp/Facebook/Google crawlers that don't run JS.
+exports.blogPost = onRequest({ region: 'us-central1' }, async (req, res) => {
+  const slug = req.path.split('/').filter(Boolean).pop();
+
+  const snapshot = await admin.firestore()
+    .collection('posts')
+    .where('slug', '==', slug)
+    .limit(1)
+    .get();
+
+  if (snapshot.empty) {
+    res.status(404).set('Content-Type', 'text/html; charset=utf-8').send(`
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Post not found | Turquoise Auto Centre</title>
+<link rel="stylesheet" href="/css/styles.css"></head>
+<body class="light"><div style="text-align:center; padding:120px 20px;">
+<h2>Post not found</h2><p><a href="/blog.html">← Back to all posts</a></p>
+</div></body></html>`);
+    return;
+  }
+
+  const post = snapshot.docs[0].data();
+  const { header, footer } = siteHeaderFooter();
+  const url = `${SITE_URL}/blog/${slug}`;
+  const publishedDate = post.published_at?.toDate
+    ? post.published_at.toDate().toLocaleDateString()
+    : '';
+
+  res.set('Content-Type', 'text/html; charset=utf-8').send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="${escapeHtml(post.excerpt)}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="${url}" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${url}">
+  <meta property="og:title" content="${escapeHtml(post.title)}">
+  <meta property="og:description" content="${escapeHtml(post.excerpt)}">
+  <meta property="og:image" content="${escapeHtml(post.image_url || '')}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(post.title)}">
+  <meta name="twitter:description" content="${escapeHtml(post.excerpt)}">
+  <meta name="twitter:image" content="${escapeHtml(post.image_url || '')}">
+
+  <title>${escapeHtml(post.title)} | Turquoise Auto Centre</title>
+
+  <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    .post-article { max-width: 760px; margin: 100px auto 60px; padding: 0 20px; }
+    .post-article img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    .post-meta { color: var(--text-muted, #666); margin-bottom: 24px; }
+  </style>
+</head>
+<body class="light">
+${header}
+<article class="post-article">
+  <p><a href="/blog.html">← Back to all posts</a></p>
+  ${post.image_url ? `<img src="${escapeHtml(post.image_url)}" alt="${escapeHtml(post.title)}" />` : ''}
+  <h1>${escapeHtml(post.title)}</h1>
+  <div class="post-meta">${post.category ? escapeHtml(post.category) + ' · ' : ''}${publishedDate}</div>
+  <div>${post.content || ''}</div>
+</article>
+${footer}
+</body>
+</html>`);
+});
+
+// Dynamic sitemap of blog posts, since they live in Firestore rather than
+// as static pages — combined with the static sitemap.xml via sitemap-index.xml.
+exports.sitemapPosts = onRequest({ region: 'us-central1' }, async (req, res) => {
+  const snapshot = await admin.firestore().collection('posts').get();
+
+  const urls = snapshot.docs.map((doc) => {
+    const post = doc.data();
+    const lastmod = post.updated_at?.toDate
+      ? post.updated_at.toDate().toISOString().split('T')[0]
+      : '';
+    return `  <url>\n    <loc>${SITE_URL}/blog/${post.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+  }).join('\n');
+
+  res.set('Content-Type', 'application/xml; charset=utf-8').send(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`
+  );
+});
+
 // Generates a ~400px-wide thumbnail for any image uploaded under
 // post-images/ by the admin panel, mirrored at post-images/thumbnails/.
 exports.generateThumbnail = onObjectFinalized({ region: 'us-east1' }, async (event) => {

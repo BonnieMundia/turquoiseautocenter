@@ -124,6 +124,13 @@ async function uploadPostImage(file) {
   };
 }
 
+function slugify(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 postForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -150,9 +157,11 @@ postForm.addEventListener('submit', async (e) => {
     }
 
     if (id) {
+      // Slug stays fixed once set, so already-shared links never break.
       await updateDoc(doc(db, 'posts', id), data);
       showToast('success', 'Post updated', title);
     } else {
+      data.slug = slugify(title);
       data.published_at = Timestamp.now();
       data.created_at = Timestamp.now();
       await addDoc(collection(db, 'posts'), data);

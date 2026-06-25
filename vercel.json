@@ -1,5 +1,15 @@
 {
   "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/blog/:slug",
+      "destination": "https://us-central1-turquoiseautocentre.cloudfunctions.net/blogPost/:slug"
+    },
+    {
+      "source": "/sitemap-posts.xml",
+      "destination": "https://us-central1-turquoiseautocentre.cloudfunctions.net/sitemapPosts"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
