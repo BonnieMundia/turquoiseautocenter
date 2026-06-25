@@ -80,6 +80,7 @@ onAuthStateChanged(auth, (user) => {
     appView.classList.remove('hidden');
     loadPosts();
     loadEnquiries();
+    loadStats();
   } else {
     loginView.classList.remove('hidden');
     appView.classList.add('hidden');
@@ -271,4 +272,30 @@ async function loadEnquiries() {
     });
     list.appendChild(row);
   });
+}
+
+// ── Stats ──
+async function loadStats() {
+  const list = document.getElementById('stats-list');
+  list.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+  const snap = await getDocs(query(collection(db, 'posts'), orderBy('published_at', 'desc')));
+  const posts = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+  if (posts.length === 0) {
+    list.innerHTML = '<tr><td colspan="4">No posts yet.</td></tr>';
+    return;
+  }
+
+  list.innerHTML = posts.map((post) => {
+    const published = post.published_at?.toDate ? post.published_at.toDate().toLocaleDateString() : '';
+    return `
+      <tr>
+        <td>${post.title}</td>
+        <td>${post.views || 0}</td>
+        <td>${post.shares || 0}</td>
+        <td>${published}</td>
+      </tr>
+    `;
+  }).join('');
 }

@@ -26,6 +26,10 @@
     .admin-post-row .grow, .admin-enquiry-row .grow { flex: 1; }
     .admin-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
     .admin-form textarea { min-height: 140px; }
+    .admin-stats-table { width: 100%; border-collapse: collapse; }
+    .admin-stats-table th, .admin-stats-table td {
+      text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(128,128,128,0.2);
+    }
     .hidden { display: none; }
   </style>
 </head>
@@ -53,6 +57,7 @@
   <div class="admin-tabs">
     <button class="admin-tab-btn active" data-tab="posts">Posts</button>
     <button class="admin-tab-btn" data-tab="enquiries">Enquiries</button>
+    <button class="admin-tab-btn" data-tab="stats">Stats</button>
   </div>
 
   <div id="tab-posts" class="admin-panel active">
@@ -92,6 +97,16 @@
   <div id="tab-enquiries" class="admin-panel">
     <h3>Enquiries</h3>
     <div id="enquiries-list"></div>
+  </div>
+
+  <div id="tab-stats" class="admin-panel">
+    <h3>Post Stats</h3>
+    <table class="admin-stats-table">
+      <thead>
+        <tr><th>Title</th><th>Views</th><th>Shares</th><th>Published</th></tr>
+      </thead>
+      <tbody id="stats-list"></tbody>
+    </table>
   </div>
 </div>
 

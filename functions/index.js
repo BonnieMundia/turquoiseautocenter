@@ -199,7 +199,12 @@ exports.blogPost = onRequest({ region: 'us-central1' }, async (req, res) => {
     return;
   }
 
+  const postRef = snapshot.docs[0].ref;
   const post = snapshot.docs[0].data();
+  postRef.update({ views: admin.firestore.FieldValue.increment(1) }).catch((err) =>
+    console.error('Failed to increment views:', err)
+  );
+
   const { header, footer } = siteHeaderFooter();
   const url = `${SITE_URL}/blog/${slug}`;
   const publishedDate = post.published_at?.toDate
@@ -234,9 +239,15 @@ exports.blogPost = onRequest({ region: 'us-central1' }, async (req, res) => {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="/css/styles.css" />
   <style>
-    .post-article { max-width: 760px; margin: 100px auto 60px; padding: 0 20px; }
+    .post-article { max-width: 760px; margin: 100px auto 60px; padding: 0 20px; line-height: 1.7; }
     .post-article img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
     .post-meta { color: var(--text-muted, #666); margin-bottom: 24px; }
+    .post-article h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+    .post-article h3 { margin-top: 2rem; margin-bottom: 0.75rem; }
+    .post-article p { margin-bottom: 1.25rem; }
+    .post-article ul { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .post-article li { margin-bottom: 0.5rem; }
+    .post-share-btn { margin: 24px 0; }
   </style>
 </head>
 <body class="light">
@@ -246,11 +257,84 @@ ${header}
   ${post.image_url ? `<img src="${escapeHtml(post.image_url)}" alt="${escapeHtml(post.title)}" />` : ''}
   <h1>${escapeHtml(post.title)}</h1>
   <div class="post-meta">${post.category ? escapeHtml(post.category) + ' · ' : ''}${publishedDate}</div>
+  <button id="share-btn" class="btn-primary post-share-btn">
+    <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share this post
+  </button>
   <div>${post.content || ''}</div>
 </article>
 ${footer}
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+<script>
+(function () {
+  var url = ${JSON.stringify(url)};
+  var title = ${JSON.stringify(post.title)};
+  var slug = ${JSON.stringify(slug)};
+
+  function notifyShare() {
+    fetch('https://us-central1-turquoiseautocentre.cloudfunctions.net/incrementShare', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: slug }),
+    }).catch(function () {});
+  }
+
+  function showCopiedToast() {
+    var container = document.getElementById('toast-container');
+    if (!container) return;
+    var toast = document.createElement('div');
+    toast.className = 'toast toast-success';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = '<div class="toast-body"><div class="toast-title">Link copied!</div></div>';
+    container.appendChild(toast);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { toast.classList.add('toast-visible'); });
+    });
+    setTimeout(function () { toast.remove(); }, 4000);
+  }
+
+  document.getElementById('share-btn').addEventListener('click', function () {
+    if (navigator.share) {
+      navigator.share({ title: title, url: url }).then(notifyShare).catch(function () {});
+    } else {
+      navigator.clipboard.writeText(url).then(function () {
+        showCopiedToast();
+        notifyShare();
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>`);
+});
+
+// Increments a post's share counter — called by the Share button on the
+// blogPost permalink page. Public and unauthenticated, same openness as
+// submitEnquiry; worst case is an inflated (non-sensitive) share count.
+exports.incrementShare = onRequest({ region: 'us-central1' }, (req, res) => {
+  cors(req, res, async () => {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
+    const { slug } = req.body || {};
+    if (!slug) {
+      return res.status(400).json({ error: 'Missing slug' });
+    }
+
+    const snapshot = await admin.firestore()
+      .collection('posts')
+      .where('slug', '==', slug)
+      .limit(1)
+      .get();
+
+    if (snapshot.empty) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    await snapshot.docs[0].ref.update({ shares: admin.firestore.FieldValue.increment(1) });
+    return res.status(200).json({ success: true });
+  });
 });
 
 // Dynamic sitemap of blog posts, since they live in Firestore rather than
