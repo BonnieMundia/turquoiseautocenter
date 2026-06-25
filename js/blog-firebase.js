@@ -242,6 +242,9 @@ export class BlogSystemFirebase {
             <div class="blog-modal-meta">
               Published: ${this.formatDate(post.published_at)}
             </div>
+            <button class="btn-primary" onclick="blogSystemFirebase.sharePost('${post.slug || post.id}', '${(post.title || '').replace(/'/g, "\\'")}')">
+              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share this post
+            </button>
             <div class="blog-modal-content-text">${post.content || post.excerpt}</div>
           </div>
         </div>
@@ -252,6 +255,39 @@ export class BlogSystemFirebase {
     modalContainer.id = 'blog-modal-container';
     modalContainer.innerHTML = modalHTML;
     document.body.appendChild(modalContainer);
+  }
+
+  sharePost(slug, title) {
+    const url = `${window.location.origin}/blog/${slug}`;
+
+    const notifyShare = () => {
+      fetch('https://us-central1-turquoiseautocentre.cloudfunctions.net/incrementShare', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug }),
+      }).catch(() => {});
+    };
+
+    if (navigator.share) {
+      navigator.share({ title, url }).then(notifyShare).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        this.showCopiedToast();
+        notifyShare();
+      });
+    }
+  }
+
+  showCopiedToast() {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-success';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = '<div class="toast-body"><div class="toast-title">Link copied!</div></div>';
+    container.appendChild(toast);
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('toast-visible')));
+    setTimeout(() => toast.remove(), 4000);
   }
 
   closePostDetail() {
