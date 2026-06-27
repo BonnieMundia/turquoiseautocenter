@@ -87,7 +87,7 @@ exports.submitEnquiry = onRequest(
 
       await sendEmail(apiKey, {
         from: 'Turquoise Auto Centre <noreply@turquoiseautocentre.co.ke>',
-        to: [adminEmail],
+        to: [adminEmail, 'turquoiseautocentreltd@gmail.com'],
         subject: 'New Service Enquiry',
         html: `
           <h2>New Service Enquiry Received</h2>
