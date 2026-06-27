@@ -156,7 +156,7 @@ export class BlogSystemFirebase {
         <div class="blog-content">
           <h3>${post.title}</h3>
           <p>${post.excerpt}</p>
-          <a href="/blog/${post.slug || post.id}" class="blog-read-more" onclick="blogSystemFirebase.viewPost('${post.id}'); return false;">
+          <a href="/blog/${post.slug || post.id}" class="blog-read-more" onclick="event.preventDefault(); blogSystemFirebase.viewPost('${post.id}');">
             Read More →
           </a>
         </div>
@@ -337,7 +337,7 @@ export class BlogSystemFirebase {
               <div class="blog-content">
                 <h3>${post.title}</h3>
                 <p>${post.excerpt}</p>
-                <a href="/blog/${post.slug || post.id}" class="blog-read-more" onclick="blogSystemFirebase.viewPost('${post.id}'); return false;">
+                <a href="/blog/${post.slug || post.id}" class="blog-read-more" onclick="event.preventDefault(); blogSystemFirebase.viewPost('${post.id}');">
                   Read More →
                 </a>
               </div>

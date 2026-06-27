@@ -6,7 +6,7 @@
      - Network-only  → Firebase/Cloud Functions API calls
    ============================================================ */
 
-const CACHE_NAME    = 'tac-v4';
+const CACHE_NAME    = 'tac-v5';
 const OFFLINE_PAGE  = '/index.html';
 
 const PRECACHE = [
@@ -91,9 +91,15 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(c => c.put(request, clone));
           return response;
         })
-        .catch(() =>
-          caches.match(request).then(cached => cached || caches.match(OFFLINE_PAGE))
-        )
+        .catch(() => {
+          // Blog post permalinks should never silently fall back to the
+          // homepage on a network hiccup -- that's more confusing than a
+          // normal browser offline error, since it looks like a redirect bug.
+          if (url.pathname.startsWith('/blog/')) {
+            return caches.match(request).then(cached => cached || Response.error());
+          }
+          return caches.match(request).then(cached => cached || caches.match(OFFLINE_PAGE));
+        })
     );
     return;
   }
