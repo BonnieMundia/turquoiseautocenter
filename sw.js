@@ -1,12 +1,12 @@
 /* ============================================================
    Turquoise Auto Centre — Service Worker
    Strategy:
-     - Cache-first  → CSS, JS, fonts, images
-     - Network-first → HTML pages (always fresh)
+     - Network-first → everything (HTML, CSS, JS, images) — visitors
+       always get live content; cache is only an offline fallback.
      - Network-only  → Firebase/Cloud Functions API calls
    ============================================================ */
 
-const CACHE_NAME    = 'tac-v5';
+const CACHE_NAME    = 'tac-v6';
 const OFFLINE_PAGE  = '/index.html';
 
 const PRECACHE = [
@@ -104,17 +104,16 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Static assets — cache-first, update in background
+  // Static assets — network-first too, cache is only an offline fallback
   event.respondWith(
-    caches.match(request).then(cached => {
-      const networkFetch = fetch(request).then(response => {
+    fetch(request)
+      .then(response => {
         if (response.ok) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(c => c.put(request, clone));
         }
         return response;
-      });
-      return cached || networkFetch;
-    })
+      })
+      .catch(() => caches.match(request))
   );
 });
