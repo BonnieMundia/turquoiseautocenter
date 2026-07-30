@@ -2885,6 +2885,230 @@ body.light .contact-item-label { color: #0891b2; }
 }
 
 /* ══════════════════════════════════════════════════════
+   20b. VEHICLE RESTORATIONS — BEFORE & AFTER SHOWCASE
+   ══════════════════════════════════════════════════════ */
+.restorations-showcase { margin-bottom: 56px; }
+
+.restorations-heading { max-width: 640px; margin-bottom: 28px; }
+.restorations-kicker {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--turquoise);
+  margin-bottom: 8px;
+}
+.restorations-heading h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.restorations-heading p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.restorations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.restore-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 28px var(--shadow-card);
+}
+
+.restore-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.restore-card-head h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.restore-plate {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  background: var(--navy-mid);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+.restore-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--turquoise);
+  background: rgba(0,188,212,0.1);
+  border: 1px solid rgba(0,188,212,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+/* Drag-to-compare before/after slider */
+.ba-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  background: var(--navy-mid);
+}
+.ba-slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.ba-slider-after  { position: absolute; inset: 0; z-index: 1; }
+.ba-slider-before { position: absolute; inset: 0; z-index: 2; clip-path: inset(0 50% 0 0); }
+
+.ba-slider-handle {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.ba-slider-handle-line {
+  width: 2px;
+  flex: 1;
+  background: rgba(255,255,255,0.85);
+}
+.ba-slider-handle-btn {
+  width: 38px; height: 38px;
+  margin: 6px 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #0f172a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+.ba-tag {
+  position: absolute;
+  top: 12px;
+  z-index: 4;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  border-radius: 20px;
+  padding: 5px 12px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.ba-tag-before { left: 12px; }
+.ba-tag-after  { right: 12px; }
+
+.ba-expand {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  z-index: 4;
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s;
+}
+.ba-expand:hover { background: rgba(255,255,255,0.3); }
+
+/* Crossfade slideshow — used where no "before" damage photo exists */
+.ba-fade {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy-mid);
+}
+.ba-fade-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.ba-fade-img.active { opacity: 1; }
+
+/* Thumbnail strip beneath each case */
+.restore-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.restore-thumbs::-webkit-scrollbar { height: 5px; }
+
+.restore-thumb {
+  flex: 0 0 68px;
+  width: 68px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  opacity: 0.75;
+  transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
+}
+.restore-thumb:hover, .restore-thumb:focus-visible {
+  opacity: 1;
+  border-color: var(--turquoise);
+  transform: translateY(-2px);
+}
+.restore-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 560px) {
+  .restore-card-head { flex-direction: column; align-items: flex-start; }
+}
+
+/* ══════════════════════════════════════════════════════
    21. LIGHT MODE — SECTION & OVERLAY FIXES
    ══════════════════════════════════════════════════════ */
 

@@ -651,7 +651,10 @@ window.addEventListener('load', () => {
   });
 })();
 
-/* ── 19. GALLERY LIGHTBOX ── */
+/* ── 19. GALLERY LIGHTBOX ──
+   Generalized to open either the filterable grid or an arbitrary
+   set of {src, alt, cat, title} items (used by the before/after
+   restoration cards below). Exposed as window.TAQGallery.open(). */
 (function initGalleryLightbox() {
   const lightbox = document.getElementById('gallery-lightbox');
   if (!lightbox) return;
@@ -662,15 +665,20 @@ window.addEventListener('load', () => {
   const lbPrev  = document.getElementById('lb-prev');
   const lbNext  = document.getElementById('lb-next');
 
-  let visible = [];
+  let items = [];
   let current = 0;
 
-  function getVisible() {
-    return Array.from(document.querySelectorAll('.gallery-item')).filter(el => el.style.display !== 'none');
+  function itemsFromGrid() {
+    return Array.from(document.querySelectorAll('.gallery-item'))
+      .filter(el => el.style.display !== 'none')
+      .map(el => {
+        const img = el.querySelector('img');
+        return { src: img.src, alt: img.alt, cat: el.dataset.cat || '', title: el.dataset.title || '' };
+      });
   }
 
-  function open(idx) {
-    visible = getVisible();
+  function open(list, idx) {
+    items = list;
     current = idx;
     show(current);
     lightbox.classList.add('open');
@@ -684,22 +692,21 @@ window.addEventListener('load', () => {
   }
 
   function show(idx) {
-    const item = visible[idx];
+    const item = items[idx];
     if (!item) return;
-    const img = item.querySelector('img');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    lbCat.textContent   = item.dataset.cat   || '';
-    lbTitle.textContent = item.dataset.title  || '';
+    lbImg.src = item.src;
+    lbImg.alt = item.alt || '';
+    lbCat.textContent   = item.cat   || '';
+    lbTitle.textContent = item.title || '';
   }
 
-  // Open from expand button or click on item
-  document.querySelectorAll('.gallery-item').forEach((item, i) => {
+  // Open from expand button or click on a grid item
+  document.querySelectorAll('.gallery-item').forEach((item) => {
     const openLightbox = (e) => {
       e.stopPropagation();
-      const visArr = getVisible();
-      const visIdx = visArr.indexOf(item);
-      if (visIdx !== -1) open(visIdx);
+      const visArr = Array.from(document.querySelectorAll('.gallery-item')).filter(x => x.style.display !== 'none');
+      const idx = visArr.indexOf(item);
+      if (idx !== -1) open(itemsFromGrid(), idx);
     };
     const expandBtn = item.querySelector('.gallery-expand');
     if (expandBtn) expandBtn.addEventListener('click', openLightbox);
@@ -710,18 +717,111 @@ window.addEventListener('load', () => {
   lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
 
   lbPrev.addEventListener('click', () => {
-    current = (current - 1 + visible.length) % visible.length;
+    current = (current - 1 + items.length) % items.length;
     show(current);
   });
   lbNext.addEventListener('click', () => {
-    current = (current + 1) % visible.length;
+    current = (current + 1) % items.length;
     show(current);
   });
 
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft')  { current = (current - 1 + visible.length) % visible.length; show(current); }
-    if (e.key === 'ArrowRight') { current = (current + 1) % visible.length; show(current); }
+    if (e.key === 'ArrowLeft')  { current = (current - 1 + items.length) % items.length; show(current); }
+    if (e.key === 'ArrowRight') { current = (current + 1) % items.length; show(current); }
+  });
+
+  window.TAQGallery = { open };
+})();
+
+/* ── 20. BEFORE / AFTER RESTORATION SLIDERS ── */
+(function initBeforeAfterSliders() {
+  const sliders = document.querySelectorAll('[data-ba-slider]');
+  if (!sliders.length) return;
+
+  sliders.forEach(slider => {
+    const before = slider.querySelector('.ba-slider-before');
+    const handle = slider.querySelector('.ba-slider-handle');
+    let dragging = false;
+
+    function setPosition(clientX) {
+      const rect = slider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      handle.style.left = `${pct}%`;
+      slider.setAttribute('aria-valuenow', Math.round(pct));
+    }
+
+    slider.addEventListener('pointerdown', e => {
+      dragging = true;
+      slider.setPointerCapture(e.pointerId);
+      setPosition(e.clientX);
+    });
+    slider.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      setPosition(e.clientX);
+    });
+    ['pointerup', 'pointercancel'].forEach(evt => {
+      slider.addEventListener(evt, () => { dragging = false; });
+    });
+
+    slider.addEventListener('keydown', e => {
+      const rect = slider.getBoundingClientRect();
+      const current = parseFloat(handle.style.left) || 50;
+      if (e.key === 'ArrowLeft')  { setPosition(rect.left + (rect.width * Math.max(0, current - 5) / 100)); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { setPosition(rect.left + (rect.width * Math.min(100, current + 5) / 100)); e.preventDefault(); }
+    });
+  });
+})();
+
+/* ── 21. RESTORATION CARD THUMBNAILS & EXPAND → SHARED LIGHTBOX ── */
+(function initRestoreThumbs() {
+  const cards = document.querySelectorAll('.restore-card');
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    const thumbs = Array.from(card.querySelectorAll('.restore-thumb'));
+    if (!thumbs.length) return;
+
+    const items = thumbs.map(t => ({
+      src: t.dataset.src,
+      alt: t.dataset.alt || '',
+      cat: t.dataset.cat || '',
+      title: t.dataset.title || ''
+    }));
+
+    thumbs.forEach((thumb, idx) => {
+      thumb.addEventListener('click', () => {
+        if (window.TAQGallery) window.TAQGallery.open(items, idx);
+      });
+    });
+
+    const expandBtn = card.querySelector('[data-expand-set]');
+    if (expandBtn) {
+      expandBtn.addEventListener('pointerdown', e => e.stopPropagation());
+      expandBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (window.TAQGallery) window.TAQGallery.open(items, 0);
+      });
+    }
+  });
+})();
+
+/* ── 22. CROSSFADE SLIDESHOW (completed-repair showcase) ── */
+(function initBaFade() {
+  const fades = document.querySelectorAll('[data-ba-fade]');
+  if (!fades.length) return;
+
+  fades.forEach(fade => {
+    const imgs = fade.querySelectorAll('.ba-fade-img');
+    if (imgs.length < 2) return;
+    let idx = 0;
+    setInterval(() => {
+      imgs[idx].classList.remove('active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('active');
+    }, 3500);
   });
 })();

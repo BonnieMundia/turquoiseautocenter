@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/bonfa/Pictures/Turquoise/**)",
+      "Bash(node --check js/main.js)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
