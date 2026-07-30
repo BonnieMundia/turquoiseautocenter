@@ -646,135 +646,142 @@
   <h2 class="reveal reveal-up reveal-delay-1 heading-wipe">GALLERY</h2>
   <p class="section-desc reveal reveal-up reveal-delay-2">See the quality of our craftsmanship — from body repairs to complete restorations, detailing, and more.</p>
 
-  <div class="gallery-filters reveal reveal-up reveal-delay-3" role="group" aria-label="Filter gallery by category">
-    <button class="gallery-filter active" data-filter="all">All Galleries</button>
-    <button class="gallery-filter" data-filter="bodywork">Auto Body Repair</button>
-    <button class="gallery-filter" data-filter="transformation">Transformations</button>
-    <button class="gallery-filter" data-filter="carwash">Car Wash &amp; Detailing</button>
-    <button class="gallery-filter" data-filter="vehicles">Featured Vehicles</button>
-    <button class="gallery-filter" data-filter="mechanical">Mechanical &amp; Parts</button>
-    <button class="gallery-filter" data-filter="branch">Juja Branch</button>
-  </div>
-
-  <div class="gallery-grid">
-
-    <div class="gallery-item reveal reveal-up" data-category="bodywork" data-title="Professional Spray Painting" data-cat="Auto Body Repair">
-      <img src="images/gallery/spray-painting.jpg" alt="Professional spray painting at Turquoise Auto Centre" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Auto Body Repair</span>
-        <span class="gallery-title">Professional Spray Painting</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
+  <!-- Before & After Restorations -->
+  <div class="restorations-showcase reveal reveal-up reveal-delay-3">
+    <div class="restorations-heading">
+      <span class="restorations-kicker">Before &amp; After</span>
+      <h3>Real Restorations, Real Results</h3>
+      <p>Drag the slider to see the transformation on each vehicle. Tap any thumbnail below to view the full repair story.</p>
     </div>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-1" data-category="bodywork" data-title="Auto Workshop" data-cat="Auto Body Repair">
-      <img src="images/gallery/auto-workshop.jpg" alt="Auto body workshop at Turquoise Auto Centre" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Auto Body Repair</span>
-        <span class="gallery-title">Auto Workshop</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+    <div class="restorations-grid">
 
-    <div class="gallery-item reveal reveal-up reveal-delay-2" data-category="bodywork" data-title="Panel Beating &amp; Restoration" data-cat="Auto Body Repair">
-      <img src="images/gallery/panel-beating.jpg" alt="Panel beating and body restoration work" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Auto Body Repair</span>
-        <span class="gallery-title">Panel Beating &amp; Restoration</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+      <!-- Case 1: Toyota Corolla KCP 139K — front-end collision repair -->
+      <article class="restore-card">
+        <div class="restore-card-head">
+          <h4>Toyota Corolla <span class="restore-plate">KCP 139K</span></h4>
+          <span class="restore-badge">Front-End Collision Repair</span>
+        </div>
 
-    <div class="gallery-item reveal reveal-up" data-category="transformation" data-title="Complete Body Transformation" data-cat="Transformations">
-      <img src="images/gallery/transformation.jpg" alt="Complete vehicle body transformation result" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Transformations</span>
-        <span class="gallery-title">Complete Body Transformation</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="ba-slider" data-ba-slider tabindex="0" role="slider" aria-label="Before and after comparison — Toyota Corolla KCP 139K" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="ba-slider-after">
+            <picture>
+              <source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-after-1-800.webp 800w, images/gallery/restorations/corolla-kcp139k-after-1-1200.webp 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px">
+              <img src="images/gallery/restorations/corolla-kcp139k-after-1-800.jpg" srcset="images/gallery/restorations/corolla-kcp139k-after-1-800.jpg 800w, images/gallery/restorations/corolla-kcp139k-after-1-1200.jpg 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px" alt="Toyota Corolla KCP 139K after repair, fully restored" loading="lazy" width="800" height="600" />
+            </picture>
+          </div>
+          <div class="ba-slider-before">
+            <picture>
+              <source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-before-crash-800.webp 800w, images/gallery/restorations/corolla-kcp139k-before-crash-1200.webp 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px">
+              <img src="images/gallery/restorations/corolla-kcp139k-before-crash-800.jpg" srcset="images/gallery/restorations/corolla-kcp139k-before-crash-800.jpg 800w, images/gallery/restorations/corolla-kcp139k-before-crash-1200.jpg 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px" alt="Toyota Corolla KCP 139K before repair, front-end crash damage" loading="lazy" width="800" height="600" />
+            </picture>
+          </div>
+          <div class="ba-slider-handle" aria-hidden="true">
+            <span class="ba-slider-handle-line"></span>
+            <span class="ba-slider-handle-btn"><i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i></span>
+            <span class="ba-slider-handle-line"></span>
+          </div>
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <button class="ba-expand" data-expand-set aria-label="View full-size photos of this repair"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
+        </div>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-1" data-category="transformation" data-title="Paint &amp; Finish Refresh" data-cat="Transformations">
-      <img src="images/gallery/paint-refresh.jpg" alt="Paint and finish refresh transformation" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Transformations</span>
-        <span class="gallery-title">Paint &amp; Finish Refresh</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="restore-thumbs" data-restore-set>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-before-crash-1200.jpg" data-alt="Front-end crash damage" data-cat="Before Restoration" data-title="Toyota Corolla KCP 139K — Front-End Collision">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-before-crash-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-before-crash-160.jpg" alt="Front-end crash damage" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-before-bumper-800.jpg" data-alt="Close-up of damaged bumper and engine bay" data-cat="Before Restoration" data-title="Toyota Corolla KCP 139K — Damaged Bumper">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-before-bumper-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-before-bumper-160.jpg" alt="Close-up of damaged bumper and engine bay" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-before-fender-1200.jpg" data-alt="Dented fender before repair" data-cat="Before Restoration" data-title="Toyota Corolla KCP 139K — Dented Fender">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-before-fender-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-before-fender-160.jpg" alt="Dented fender before repair" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-before-tire-1200.jpg" data-alt="Shredded tyre before repair" data-cat="Before Restoration" data-title="Toyota Corolla KCP 139K — Shredded Tyre">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-before-tire-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-before-tire-160.jpg" alt="Shredded tyre before repair" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-after-1-1200.jpg" data-alt="Fully restored Corolla with replaced parts" data-cat="After Restoration" data-title="Toyota Corolla KCP 139K — Fully Restored">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-after-1-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-after-1-160.jpg" alt="Fully restored Corolla with replaced parts" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/corolla-kcp139k-after-2-1200.jpg" data-alt="Fully restored Corolla, wider view" data-cat="After Restoration" data-title="Toyota Corolla KCP 139K — Fully Restored">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/corolla-kcp139k-after-2-160.webp"><img src="images/gallery/restorations/corolla-kcp139k-after-2-160.jpg" alt="Fully restored Corolla, wider view" loading="lazy" /></picture>
+          </button>
+        </div>
+      </article>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-2" data-category="carwash" data-title="Professional Car Wash" data-cat="Car Wash &amp; Detailing">
-      <img src="images/gallery/car-wash.jpg" alt="Professional car wash — wheel cleaning" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Car Wash &amp; Detailing</span>
-        <span class="gallery-title">Professional Car Wash</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+      <!-- Case 2: Toyota Land Cruiser Prado KDH 089E — side panel & tyre replacement -->
+      <article class="restore-card">
+        <div class="restore-card-head">
+          <h4>Land Cruiser Prado <span class="restore-plate">KDH 089E</span></h4>
+          <span class="restore-badge">Side Panel &amp; Tyre Replacement</span>
+        </div>
 
-    <div class="gallery-item reveal reveal-up" data-category="carwash" data-title="Exterior Detailing" data-cat="Car Wash &amp; Detailing">
-      <img src="images/gallery/detailing.jpg" alt="Exterior car detailing service" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Car Wash &amp; Detailing</span>
-        <span class="gallery-title">Exterior Detailing</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="ba-slider" data-ba-slider tabindex="0" role="slider" aria-label="Before and after comparison — Prado KDH 089E" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="ba-slider-after">
+            <picture>
+              <source type="image/webp" srcset="images/gallery/restorations/prado-kdh089e-after-1-800.webp 800w, images/gallery/restorations/prado-kdh089e-after-1-1200.webp 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px">
+              <img src="images/gallery/restorations/prado-kdh089e-after-1-800.jpg" srcset="images/gallery/restorations/prado-kdh089e-after-1-800.jpg 800w, images/gallery/restorations/prado-kdh089e-after-1-1200.jpg 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px" alt="Prado KDH 089E after repair, new tyres fitted" loading="lazy" width="800" height="600" />
+            </picture>
+          </div>
+          <div class="ba-slider-before">
+            <picture>
+              <source type="image/webp" srcset="images/gallery/restorations/prado-kdh089e-before-rocker-800.webp 800w, images/gallery/restorations/prado-kdh089e-before-rocker-1200.webp 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px">
+              <img src="images/gallery/restorations/prado-kdh089e-before-rocker-800.jpg" srcset="images/gallery/restorations/prado-kdh089e-before-rocker-800.jpg 800w, images/gallery/restorations/prado-kdh089e-before-rocker-1200.jpg 1200w" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 33vw, 360px" alt="Prado KDH 089E before repair, scratched rocker panel" loading="lazy" width="800" height="600" />
+            </picture>
+          </div>
+          <div class="ba-slider-handle" aria-hidden="true">
+            <span class="ba-slider-handle-line"></span>
+            <span class="ba-slider-handle-btn"><i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i></span>
+            <span class="ba-slider-handle-line"></span>
+          </div>
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+          <button class="ba-expand" data-expand-set aria-label="View full-size photos of this repair"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
+        </div>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-1" data-category="vehicles" data-title="Ferrari 458 Italia" data-cat="Featured Vehicles">
-      <img src="images/gallery/ferrari.jpg" alt="Ferrari 458 Italia featured vehicle" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Featured Vehicles</span>
-        <span class="gallery-title">Ferrari 458 Italia</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="restore-thumbs" data-restore-set>
+          <button class="restore-thumb" data-src="images/gallery/restorations/prado-kdh089e-before-rocker-1200.jpg" data-alt="Scratched rocker panel before repair" data-cat="Before Restoration" data-title="Prado KDH 089E — Rocker Panel Damage">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/prado-kdh089e-before-rocker-160.webp"><img src="images/gallery/restorations/prado-kdh089e-before-rocker-160.jpg" alt="Scratched rocker panel before repair" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/prado-kdh089e-after-1-1200.jpg" data-alt="Prado with new tyres fitted" data-cat="After Restoration" data-title="Prado KDH 089E — New Tyres Fitted">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/prado-kdh089e-after-1-160.webp"><img src="images/gallery/restorations/prado-kdh089e-after-1-160.jpg" alt="Prado with new tyres fitted" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/prado-kdh089e-after-2-1200.jpg" data-alt="Prado repair completed, side moulding and mirror replaced" data-cat="After Restoration" data-title="Prado KDH 089E — Repair Completed">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/prado-kdh089e-after-2-160.webp"><img src="images/gallery/restorations/prado-kdh089e-after-2-160.jpg" alt="Prado repair completed, side moulding and mirror replaced" loading="lazy" /></picture>
+          </button>
+        </div>
+      </article>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-2" data-category="vehicles" data-title="BMW M3 Coupe" data-cat="Featured Vehicles">
-      <img src="images/gallery/bmw.jpg" alt="BMW M3 Coupe featured vehicle" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Featured Vehicles</span>
-        <span class="gallery-title">BMW M3 Coupe</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+      <!-- Case 3: Toyota Axio KDP 882F — front panel replacement (completed-repair showcase) -->
+      <article class="restore-card">
+        <div class="restore-card-head">
+          <h4>Toyota Axio <span class="restore-plate">KDP 882F</span></h4>
+          <span class="restore-badge">Front Panel Replacement</span>
+        </div>
 
-    <div class="gallery-item reveal reveal-up" data-category="mechanical" data-title="Engine Overhaul" data-cat="Mechanical &amp; Parts">
-      <img src="images/gallery/engine.jpg" alt="Engine overhaul and mechanical repair" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Mechanical &amp; Parts</span>
-        <span class="gallery-title">Engine Overhaul</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="ba-fade" data-ba-fade>
+          <picture class="ba-fade-img active">
+            <source type="image/webp" srcset="images/gallery/restorations/axio-kdp882f-after-1-orig.webp">
+            <img src="images/gallery/restorations/axio-kdp882f-after-1.jpg" alt="Toyota Axio KDP 882F with replaced grille, headlight and bonnet" loading="lazy" width="721" height="1600" />
+          </picture>
+          <picture class="ba-fade-img">
+            <source type="image/webp" srcset="images/gallery/restorations/axio-kdp882f-after-2-orig.webp">
+            <img src="images/gallery/restorations/axio-kdp882f-after-2.jpg" alt="Toyota Axio KDP 882F, wider view of completed repair" loading="lazy" width="721" height="1600" />
+          </picture>
+          <span class="ba-tag ba-tag-after">Completed</span>
+          <button class="ba-expand" data-expand-set aria-label="View full-size photos of this repair"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
+        </div>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-1" data-category="mechanical" data-title="Mechanical Repair" data-cat="Mechanical &amp; Parts">
-      <img src="images/gallery/mechanical.jpg" alt="Mechanical repair work in workshop" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Mechanical &amp; Parts</span>
-        <span class="gallery-title">Mechanical Repair</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
+        <div class="restore-thumbs" data-restore-set>
+          <button class="restore-thumb" data-src="images/gallery/restorations/axio-kdp882f-after-1.jpg" data-alt="Replaced grille, headlight and bonnet laid out" data-cat="Completed Repair" data-title="Toyota Axio KDP 882F — New Parts Fitted">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/axio-kdp882f-after-1-160.webp"><img src="images/gallery/restorations/axio-kdp882f-after-1-160.jpg" alt="Replaced grille, headlight and bonnet laid out" loading="lazy" /></picture>
+          </button>
+          <button class="restore-thumb" data-src="images/gallery/restorations/axio-kdp882f-after-2.jpg" data-alt="Wider view of completed repair" data-cat="Completed Repair" data-title="Toyota Axio KDP 882F — New Parts Fitted">
+            <picture><source type="image/webp" srcset="images/gallery/restorations/axio-kdp882f-after-2-160.webp"><img src="images/gallery/restorations/axio-kdp882f-after-2-160.jpg" alt="Wider view of completed repair" loading="lazy" /></picture>
+          </button>
+        </div>
+      </article>
 
-    <div class="gallery-item reveal reveal-up reveal-delay-2" data-category="branch" data-title="Our Workshop — Juja" data-cat="Juja Branch">
-      <img src="images/gallery/juja-workshop.jpg" alt="Turquoise Auto Centre workshop in Juja" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Juja Branch</span>
-        <span class="gallery-title">Our Workshop — Juja</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
     </div>
-
-    <div class="gallery-item reveal reveal-up" data-category="branch" data-title="Service Bay" data-cat="Juja Branch">
-      <img src="images/gallery/service-bay.jpg" alt="Turquoise Auto Centre service bay" loading="lazy" width="800" height="600" />
-      <div class="gallery-overlay">
-        <span class="gallery-cat">Juja Branch</span>
-        <span class="gallery-title">Service Bay</span>
-      </div>
-      <button class="gallery-expand" aria-label="View full size"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
-    </div>
-
   </div>
 
   <p class="reveal reveal-up reveal-delay-2" style="margin-top:32px; text-align:center;">
@@ -790,8 +797,13 @@
   <div class="lb-img-wrap">
     <img id="lb-img" src="" alt="" />
     <div class="lb-caption">
-      <span class="lb-caption-cat" id="lb-cat"></span>
-      <span class="lb-caption-title" id="lb-title"></span>
+      <div class="lb-caption-text">
+        <span class="lb-caption-cat" id="lb-cat"></span>
+        <span class="lb-caption-title" id="lb-title"></span>
+      </div>
+      <button class="lb-share" id="lb-share" aria-label="Share this photo">
+        <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </div>
