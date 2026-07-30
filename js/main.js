@@ -870,7 +870,9 @@ window.addEventListener('load', () => {
   sliders.forEach(slider => {
     const before = slider.querySelector('.ba-slider-before');
     const handle = slider.querySelector('.ba-slider-handle');
-    let dragging = false;
+    let dragging = false; // horizontal drag confirmed and in progress
+    let pending = false;  // pointer is down on touch/pen, direction not yet decided
+    let startX = 0, startY = 0;
 
     function setPosition(clientX) {
       const rect = slider.getBoundingClientRect();
@@ -882,16 +884,45 @@ window.addEventListener('load', () => {
     }
 
     slider.addEventListener('pointerdown', e => {
+      startX = e.clientX;
+      startY = e.clientY;
+      if (e.pointerType === 'mouse') {
+        // Mouse has no scroll-gesture to conflict with — drag immediately.
+        dragging = true;
+        slider.setPointerCapture(e.pointerId);
+        setPosition(e.clientX);
+      } else {
+        // Touch/pen: don't grab the gesture yet. If the next move is more
+        // vertical than horizontal, we let the page scroll instead of
+        // hijacking it into a slider drag.
+        pending = true;
+      }
+    });
+
+    slider.addEventListener('pointermove', e => {
+      if (dragging) {
+        setPosition(e.clientX);
+        return;
+      }
+      if (!pending) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return; // too small to tell yet
+
+      if (Math.abs(dy) > Math.abs(dx)) {
+        pending = false; // vertical intent — hand this gesture back to page scroll
+        return;
+      }
+
+      pending = false;
       dragging = true;
       slider.setPointerCapture(e.pointerId);
       setPosition(e.clientX);
     });
-    slider.addEventListener('pointermove', e => {
-      if (!dragging) return;
-      setPosition(e.clientX);
-    });
+
     ['pointerup', 'pointercancel'].forEach(evt => {
-      slider.addEventListener(evt, () => { dragging = false; });
+      slider.addEventListener(evt, () => { dragging = false; pending = false; });
     });
 
     slider.addEventListener('keydown', e => {
