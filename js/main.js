@@ -654,19 +654,27 @@ window.addEventListener('load', () => {
 /* ── 19. GALLERY LIGHTBOX ──
    Generalized to open either the filterable grid or an arbitrary
    set of {src, alt, cat, title} items (used by the before/after
-   restoration cards below). Exposed as window.TAQGallery.open(). */
+   restoration cards below). Exposed as window.TAQGallery.open().
+   Also handles touch swipe navigation and double-tap/double-click
+   zoom on the open image. */
 (function initGalleryLightbox() {
   const lightbox = document.getElementById('gallery-lightbox');
   if (!lightbox) return;
+  const lbWrap  = lightbox.querySelector('.lb-img-wrap');
   const lbImg   = document.getElementById('lb-img');
   const lbCat   = document.getElementById('lb-cat');
   const lbTitle = document.getElementById('lb-title');
   const lbClose = document.getElementById('lb-close');
   const lbPrev  = document.getElementById('lb-prev');
   const lbNext  = document.getElementById('lb-next');
+  const lbShare = document.getElementById('lb-share');
 
   let items = [];
   let current = 0;
+
+  // Zoom/pan state for the open image
+  let zoomed = false;
+  let panX = 0, panY = 0;
 
   function itemsFromGrid() {
     return Array.from(document.querySelectorAll('.gallery-item'))
@@ -675,6 +683,23 @@ window.addEventListener('load', () => {
         const img = el.querySelector('img');
         return { src: img.src, alt: img.alt, cat: el.dataset.cat || '', title: el.dataset.title || '' };
       });
+  }
+
+  function resetZoom() {
+    zoomed = false;
+    panX = 0;
+    panY = 0;
+    lbImg.style.transform = '';
+    lbImg.classList.remove('zoomed');
+  }
+
+  function toggleZoom() {
+    zoomed = !zoomed;
+    if (zoomed) {
+      lbImg.classList.add('zoomed');
+    } else {
+      resetZoom();
+    }
   }
 
   function open(list, idx) {
@@ -689,16 +714,22 @@ window.addEventListener('load', () => {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
     lbImg.src = '';
+    resetZoom();
   }
 
   function show(idx) {
     const item = items[idx];
     if (!item) return;
+    resetZoom();
     lbImg.src = item.src;
     lbImg.alt = item.alt || '';
     lbCat.textContent   = item.cat   || '';
     lbTitle.textContent = item.title || '';
+    if (lbShare) lbShare.dataset.shareItem = JSON.stringify(item);
   }
+
+  function goPrev() { current = (current - 1 + items.length) % items.length; show(current); }
+  function goNext() { current = (current + 1) % items.length; show(current); }
 
   // Open from expand button or click on a grid item
   document.querySelectorAll('.gallery-item').forEach((item) => {
@@ -716,21 +747,117 @@ window.addEventListener('load', () => {
   lbClose.addEventListener('click', close);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
 
-  lbPrev.addEventListener('click', () => {
-    current = (current - 1 + items.length) % items.length;
-    show(current);
-  });
-  lbNext.addEventListener('click', () => {
-    current = (current + 1) % items.length;
-    show(current);
-  });
+  lbPrev.addEventListener('click', goPrev);
+  lbNext.addEventListener('click', goNext);
 
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft')  { current = (current - 1 + items.length) % items.length; show(current); }
-    if (e.key === 'ArrowRight') { current = (current + 1) % items.length; show(current); }
+    if (e.key === 'ArrowLeft')  goPrev();
+    if (e.key === 'ArrowRight') goNext();
   });
+
+  // Touch/mouse swipe-to-navigate + drag-to-pan when zoomed + double-tap zoom
+  if (lbWrap) {
+    let dragging = false;
+    let startX = 0, startY = 0, panStartX = 0, panStartY = 0;
+    let lastTapTime = 0;
+
+    lbWrap.addEventListener('pointerdown', e => {
+      dragging = true;
+      lbWrap.setPointerCapture(e.pointerId);
+      if (zoomed) {
+        panStartX = e.clientX - panX;
+        panStartY = e.clientY - panY;
+      } else {
+        startX = e.clientX;
+        startY = e.clientY;
+      }
+    });
+
+    lbWrap.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      if (zoomed) {
+        panX = e.clientX - panStartX;
+        panY = e.clientY - panStartY;
+        lbImg.style.transform = `scale(2) translate(${panX / 2}px, ${panY / 2}px)`;
+      } else {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy)) {
+          lbWrap.style.transform = `translateX(${dx}px)`;
+          lbWrap.style.opacity = String(1 - Math.min(Math.abs(dx) / 400, 0.5));
+        }
+      }
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+
+      if (zoomed) return;
+
+      const dx = e.clientX - startX;
+      lbWrap.style.transform = '';
+      lbWrap.style.opacity = '';
+      if (Math.abs(dx) > 60) {
+        if (dx > 0) goPrev(); else goNext();
+        return;
+      }
+
+      // Treat a near-stationary tap/click as a possible double-tap zoom toggle
+      if (Math.abs(dx) < 10) {
+        const now = Date.now();
+        if (now - lastTapTime < 300) toggleZoom();
+        lastTapTime = now;
+      }
+    }
+
+    lbWrap.addEventListener('pointerup', endDrag);
+    lbWrap.addEventListener('pointercancel', () => {
+      dragging = false;
+      lbWrap.style.transform = '';
+      lbWrap.style.opacity = '';
+    });
+  }
+
+  // Share the open photo — native share sheet (with the image file, where
+  // supported) first, falling back to a WhatsApp text+link share.
+  async function shareCurrentItem() {
+    let item = {};
+    try { item = JSON.parse(lbShare.dataset.shareItem || '{}'); } catch (e) { /* ignore */ }
+    if (!item.src) return;
+
+    const pageUrl = window.location.href.split('#')[0];
+    const shareText = item.title ? `${item.title} — Turquoise Auto Centre` : 'Turquoise Auto Centre';
+
+    if (navigator.share) {
+      let shareData = { title: shareText, text: shareText, url: pageUrl };
+      try {
+        if (navigator.canShare) {
+          const res = await fetch(item.src);
+          const blob = await res.blob();
+          const file = new File([blob], 'repair-photo.jpg', { type: blob.type || 'image/jpeg' });
+          if (navigator.canShare({ files: [file] })) {
+            shareData = { title: shareText, text: shareText, files: [file] };
+          }
+        }
+      } catch (fetchErr) { /* keep the link-only shareData */ }
+
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if (err && err.name === 'AbortError') return; // user dismissed the share sheet
+        // otherwise fall through to the WhatsApp fallback below
+      }
+    }
+
+    const waText = encodeURIComponent(`${shareText}\n${pageUrl}`);
+    window.open(`https://wa.me/?text=${waText}`, '_blank', 'noopener');
+  }
+
+  if (lbShare) lbShare.addEventListener('click', shareCurrentItem);
 
   window.TAQGallery = { open };
 })();
@@ -823,5 +950,34 @@ window.addEventListener('load', () => {
       idx = (idx + 1) % imgs.length;
       imgs[idx].classList.add('active');
     }, 3500);
+  });
+})();
+
+/* ── 23. IMAGE LOADING SKELETON ──
+   Shows a shimmer (see .img-shimmer keyframes in styles.css) behind each
+   before/after slider, fade showcase and thumbnail until its image(s)
+   finish loading, then stops the animation. */
+(function initImageSkeletons() {
+  const containers = document.querySelectorAll('.ba-slider, .ba-fade, .restore-thumb');
+  if (!containers.length) return;
+
+  containers.forEach(container => {
+    const imgs = Array.from(container.querySelectorAll('img'));
+    if (!imgs.length) return;
+    let pending = imgs.length;
+
+    function markLoaded() {
+      pending -= 1;
+      if (pending <= 0) container.classList.add('img-loaded');
+    }
+
+    imgs.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+        img.addEventListener('error', markLoaded, { once: true });
+      }
+    });
   });
 })();

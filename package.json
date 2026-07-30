@@ -4,9 +4,13 @@
   "description": "Blog system for Turquoise Auto Centre",
   "scripts": {
     "build": "node scripts/generate-config.js",
-    "vercel-build": "node scripts/generate-config.js"
+    "vercel-build": "node scripts/generate-config.js",
+    "generate-gallery-images": "node scripts/generate-gallery-images.js"
   },
   "keywords": ["blog", "firebase"],
   "author": "Turquoise Auto Centre",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  }
 }
