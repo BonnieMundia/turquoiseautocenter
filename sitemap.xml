@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Homepage -->
   <url>
     <loc>https://www.turquoiseautocentre.co.ke/</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-crash-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Front-End Collision Damage</image:title>
+      <image:caption>Before repair: front-end crash damage</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-bumper-800.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Damaged Bumper Close-Up</image:title>
+      <image:caption>Before repair: damaged bumper and engine bay</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-fender-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Dented Fender</image:title>
+      <image:caption>Before repair: dented fender</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-tire-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Shredded Tyre</image:title>
+      <image:caption>Before repair: shredded tyre</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-after-1-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Fully Restored</image:title>
+      <image:caption>After repair: fully restored</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-after-2-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Fully Restored, Wide View</image:title>
+      <image:caption>After repair: fully restored, wide view</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-before-rocker-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — Rocker Panel Damage</image:title>
+      <image:caption>Before repair: scratched rocker panel</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-after-1-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — New Tyres Fitted</image:title>
+      <image:caption>After repair: new tyres fitted</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-after-2-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — Repair Completed</image:title>
+      <image:caption>After repair: side moulding and mirror replaced</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/axio-kdp882f-after-1.jpg</image:loc>
+      <image:title>Toyota Axio KDP 882F — New Front Parts Fitted</image:title>
+      <image:caption>Completed repair: grille, headlight and bonnet replaced</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/axio-kdp882f-after-2.jpg</image:loc>
+      <image:title>Toyota Axio KDP 882F — Repair Completed, Wide View</image:title>
+      <image:caption>Completed repair: wide view</image:caption>
+    </image:image>
   </url>
 
   <!-- Services page -->
@@ -61,9 +117,64 @@
   <!-- Gallery page -->
   <url>
     <loc>https://www.turquoiseautocentre.co.ke/gallery.html</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-crash-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Front-End Collision Damage</image:title>
+      <image:caption>Before repair: front-end crash damage</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-bumper-800.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Damaged Bumper Close-Up</image:title>
+      <image:caption>Before repair: damaged bumper and engine bay</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-fender-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Dented Fender</image:title>
+      <image:caption>Before repair: dented fender</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-before-tire-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Shredded Tyre</image:title>
+      <image:caption>Before repair: shredded tyre</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-after-1-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Fully Restored</image:title>
+      <image:caption>After repair: fully restored</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/corolla-kcp139k-after-2-1200.jpg</image:loc>
+      <image:title>Toyota Corolla KCP 139K — Fully Restored, Wide View</image:title>
+      <image:caption>After repair: fully restored, wide view</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-before-rocker-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — Rocker Panel Damage</image:title>
+      <image:caption>Before repair: scratched rocker panel</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-after-1-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — New Tyres Fitted</image:title>
+      <image:caption>After repair: new tyres fitted</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/prado-kdh089e-after-2-1200.jpg</image:loc>
+      <image:title>Land Cruiser Prado KDH 089E — Repair Completed</image:title>
+      <image:caption>After repair: side moulding and mirror replaced</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/axio-kdp882f-after-1.jpg</image:loc>
+      <image:title>Toyota Axio KDP 882F — New Front Parts Fitted</image:title>
+      <image:caption>Completed repair: grille, headlight and bonnet replaced</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.turquoiseautocentre.co.ke/images/gallery/restorations/axio-kdp882f-after-2.jpg</image:loc>
+      <image:title>Toyota Axio KDP 882F — Repair Completed, Wide View</image:title>
+      <image:caption>Completed repair: wide view</image:caption>
+    </image:image>
   </url>
 
 </urlset>
